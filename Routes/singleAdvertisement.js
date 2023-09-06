@@ -8,7 +8,7 @@ router.get('/buyer/:id', async(req, res) => {
     const client = await pool.connect();
     const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
     if(type.rows[0].type=="meat"){
-        advertisement = await client.query("SELECT * FROM advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
     }
     else if(type.rows[0].type=="cattle"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN (cattle_advertisement JOIN cattle ON advertise_id=cattle_advertise_id) WHERE advertise_id=$1", [req.params.id]);
@@ -31,7 +31,7 @@ router.get('/seller/:id', async(req, res) => {
     const client = await pool.connect();
     const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
     if(type.rows[0].type=="meat"){
-        advertisement = await client.query("SELECT * FROM advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
     }
     else if(type.rows[0].type=="cattle"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN (cattle_advertisement JOIN cattle ON advertise_id=cattle_advertise_id) WHERE advertise_id=$1", [req.params.id]);
@@ -49,18 +49,21 @@ router.get('/seller/:id', async(req, res) => {
     res.render('singleAdvertisementSeller',{session:req.session.phone_number,advertisement:advertisement.rows[0]})
 })
 
+//Do not change...modified by ruhan
 router.get('/admin/:id', async(req, res) => {
 
     if(req.session.phone_number){
         if(req.session.type=="admin"){
-            var advertisement;
+            var advertisement,cattle;
             const client = await pool.connect();
             const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
             if(type.rows[0].type=="meat"){
-                advertisement = await client.query("SELECT * FROM advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertise_id=$1", [req.params.id]);
+                advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
             }
             else if(type.rows[0].type=="cattle"){
-                advertisement = await client.query("SELECT * FROM advertisements Natural JOIN (cattle_advertisement JOIN cattle ON advertise_id=cattle_advertise_id) WHERE advertise_id=$1", [req.params.id]);
+                advertisement = await client.query("SELECT * FROM advertisements Natural JOIN cattle_advertisement WHERE advertise_id=$1", [req.params.id]);
+                cattle = await client.query("SELECT * FROM cattle WHERE cattle_advertise_id=$1", [req.params.id]);
+                
             }
             else if(type.rows[0].type=="rawhide"){
                 advertisement = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement WHERE advertise_id=$1", [req.params.id]);
@@ -72,7 +75,15 @@ router.get('/admin/:id', async(req, res) => {
                 advertisement = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertise_id=$1", [req.params.id]);
             }
             client.release(true);
-            res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0]})
+            console.log(advertisement.rows);
+
+            if( type.rows[0].type=="cattle" ){
+                console.log(cattle.rows);
+                res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type,cattle:cattle.rows})
+            }
+            else{
+                res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type})
+            }
         }
         else{
             res.render('output',{msg:"You are not admin"})
@@ -82,7 +93,7 @@ router.get('/admin/:id', async(req, res) => {
         res.redirect('/login');
     }
 })
-
+//modified by ruhan
 router.get('/admin/reject/:id', async(req, res) => {
     if(req.session.phone_number){
         if(req.session.type=="admin"){
@@ -92,6 +103,7 @@ router.get('/admin/reject/:id', async(req, res) => {
                 await client.query("DELETE FROM meat_advertisement WHERE advertise_id=$1", [req.params.id]);
             }
             else if(type.rows[0].type=="cattle"){
+                await client.query("DELETE FROM cattle WHERE cattle_advertise_id=$1", [req.params.id]);
                 await client.query("DELETE FROM cattle_advertisement WHERE advertise_id=$1", [req.params.id]);
             }
             else if(type.rows[0].type=="rawhide"){
