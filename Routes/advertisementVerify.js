@@ -12,7 +12,7 @@ router.get('/', async(req, res) => {
             const rawhideAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement WHERE advertisements.verified=false");
             const hornAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN horn_advertisement WHERE advertisements.verified=false");
             const hoofAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertisements.verified=false");
-            // client.release(true);
+            client.release(true);
             console.log(cattleAdvertisements.rows);
             const data = {session:req.session.phone_number,advertisements: meatAdvertisements.rows.concat( hoofAdvertisements.rows , hornAdvertisements.rows , cattleAdvertisements.rows , rawhideAdvertisements.rows ) }
             // console.log(data);
