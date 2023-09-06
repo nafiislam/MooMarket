@@ -53,6 +53,10 @@ router.post('/forgetPassword', async(req, res) => {
 
     const client = await pool.connect();
     var email = await client.query('select email from Users WHERE phone_number=$1',[phone_number]);
+    if(email.rows.length == 0){
+        res.render('output',{msg:"This phone number is not registered"})
+        return;
+    }
     email = email.rows[0].email;
     client.release(true);
 
