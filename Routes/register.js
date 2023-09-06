@@ -4,6 +4,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer=require('nodemailer');
 
+const { Vonage } = require('@vonage/server-sdk')
+
+const vonage = new Vonage({
+  apiKey: "61b65c70",
+  apiSecret: "55JkOEfF1Arvuasi"
+})
+
 const { pool } = require("../db");
 
 const otpMap = new Map();
@@ -151,11 +158,12 @@ router.post('/buyersubmit', async(req, res) => {
     }); 
 
     const client = await pool.connect();
-    await client.query('INSERT INTO Users(name,email,phone_number,password,birth_date,updated_at,thana_id,type) VALUES ($1,$2,$3,$4,$5,NULL,get_thana_id($6),\'buyer\')', [name, email, phone_number, password, birth_date, thana]);
+    var user_id;
+    user_id = await client.query('INSERT INTO Users(name,email,phone_number,password,birth_date,updated_at,thana_id,type) VALUES ($1,$2,$3,$4,$5,NULL,get_thana_id($6),\'buyer\') returning user_id', [name, email, phone_number, password, birth_date, thana]);
     if(nid)
-        await client.query('INSERT INTO Buyer(delivery_address,nid,user_id) VALUES ($1,$2,(select max(user_id) from Users))', [delivery_address, nid]);
+        await client.query('INSERT INTO Buyer(delivery_address,nid,user_id) VALUES ($1,$2,$3)', [delivery_address, nid, user_id.rows[0].user_id]);
     else
-        await client.query('INSERT INTO Buyer(delivery_address,user_id) VALUES ($1,(select max(user_id) from Users))', [delivery_address]);
+        await client.query('INSERT INTO Buyer(delivery_address,user_id) VALUES ($1,$2)', [delivery_address,user_id.rows[0].user_id]);
     client.release(true)
     res.render('output',{msg:'Buyer Registration successful'}) 
 })
@@ -266,8 +274,9 @@ router.post('/sellersubmit', async(req, res) => {
     }); 
 
     const client = await pool.connect();
-    await client.query('INSERT INTO Users(name,email,phone_number,password,birth_date,updated_at,thana_id,type) VALUES ($1,$2,$3,$4,$5,NULL,get_thana_id($6),\'seller\')', [name, email, phone_number, password, birth_date, thana]);
-    await client.query('INSERT INTO Seller(present_address,permanent_address,nid,trade_license_no,company_name,short_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,(select max(user_id) from Users))',[present_address,permanent_address,nid,trade_license_no,company_name,short_description]);
+    var user_id
+    user_id = await client.query('INSERT INTO Users(name,email,phone_number,password,birth_date,updated_at,thana_id,type) VALUES ($1,$2,$3,$4,$5,NULL,get_thana_id($6),\'seller\') returning user_id', [name, email, phone_number, password, birth_date, thana]);
+    await client.query('INSERT INTO Seller(present_address,permanent_address,nid,trade_license_no,company_name,short_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7)',[present_address,permanent_address,nid,trade_license_no,company_name,short_description,user_id.rows[0].user_id]);
     client.release(true)
     res.render('output',{msg:'Seller Registration successful'}) 
 })
@@ -294,22 +303,29 @@ router.post('/otp',async(req,res)=> {
 
     otpMap.set(phone_number,otp_pin_token);
 
-    const accountSid = 'AC20ee2e410c6fab586f959fc640155a79';
-    const authToken = 'fc8f459529d9284605566d3efc720d7c';
-    const twilioClient = require('twilio')(accountSid, authToken);
+    // const accountSid = 'AC20ee2e410c6fab586f959fc640155a79';
+    // const authToken = 'fc8f459529d9284605566d3efc720d7c';
+    // const twilioClient = require('twilio')(accountSid, authToken);
+    
+    // twilioClient.messages
+    // .create({
+    //     body: `Your otp is ${otp_pin}`,
+    //     from: '+18134384603',
+    //     to: `+88${phone_number}`
+    // })
+    // .then(message => console.log("otp sent sucess"))
+    // .catch(err => {
+    //     console.log(err);
+    //     console.error("Error sending OTP:");
+    // });
 
-    
-    twilioClient.messages
-    .create({
-        body: `Your otp is ${otp_pin}`,
-        from: '+18134384603',
-        to: `+88${phone_number}`
-    })
-    .then(message => console.log("otp sent sucess"))
-    .catch(err => {
-        console.error("Error sending OTP:");
-    });
-    
+    const from = "Vonage APIs"
+    const to = `+88${phone_number}`
+    const text = `Your otp is ${otp_pin}`
+
+    await vonage.sms.send({to, from, text})
+        .then(resp => { console.log('Message sent successfully'); })
+        .catch(err => { console.error(err); });
 })
 
 module.exports = router;

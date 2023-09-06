@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/advertisementVerify.css" />
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Logo (Brand) -->
+            <a class="navbar-brand" href="#">
+                <img src="/pictures/logo.png" alt="Logo" width="40" height="40" class="rounded-circle">
+            </a>
+            
+            <!-- Search Bar -->
+            <!-- <form class="d-flex mx-auto">
+                <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-outline-primary rounded-pill " type="submit">Search</button>
+            </form> -->
+
+            <!-- Username -->
+            <div class="navbar-text">
+                John Doe
+            </div>
+        </div>
+    </nav>
+
+    
+
+    <div class="container-fluid p-0">
+        <div class="d-flex justify-content-center row m-0 p-0">
+            <div class="col-md-2 side-bar">
+                <div class="d-flex flex-column align-items-center h-100 p-2">
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 mt-4 rounded-pill w-100"><h5>My Profile</h5></a>
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 rounded-pill w-100"><h5>Change Password</h5></a>
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 rounded-pill w-100"><h5>Advertisement Verify</h5></a>
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 rounded-pill w-100"><h5>Order Verify</h5></a>
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 rounded-pill w-100"><h5>Delete User</h5></a>
+                    <a href="/admin/advertisementVerify" class="btn btn-outline-warning mb-5 rounded-pill w-100"><h5>Delete Advertisement</h5></a>
+                </div>
+            </div>
+            <div class="col-md-10 pl-1 m-0">
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10  ">
+                            <% for (var i = 0; i < locals.advertisements.length ; i++) { %>
+                                <% if (locals.advertisements[i].type == 'cattle') { %>
+                                <div class="row p-2 bg-white border rounded mb-1 mt-1">
+                                    <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="<%= locals.advertisements[i].picture_front_view_url.substring(8) %>"></div>
+                                    <div class="col-md-6 mt-1">
+                                        <h5>product type: <%= locals.advertisements[i].type %></h5>
+                                        <div class="mt-1 mb-1"><span>advertisement type: <%= locals.advertisements[i].is_bid?'Auction':'Normal Buy-Sell' %><br></span></div>
+                                        <div class="mt-1 mb-1 "><span>Quantity :  <%= locals.advertisements[i].quantity %> <br></span></div>
+                                        <p class="text-justify text-truncate para mb-0"> Seller ID : <%= locals.advertisements[i].seller_id %></p>
+                                    </div>
+                                    <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <h4 class="mr-1"><%= locals.advertisements[i].is_bid?'Minimum Bid Price':'Total Price' %> : <%= locals.advertisements[i].price %> </h4>
+                                        </div>
+                                        <div class="d-flex flex-column mt-4"><a class="btn btn-primary" role="button" href="/singleAdvertisement/admin<%= locals.advertisements[i].advertise_id %>">View Details</a></div>
+                                    </div>
+                                </div>
+                                <% }else{ %>
+
+                                    <div class="row p-2 bg-white border rounded mb-1 mt-1">
+                                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="<%= locals.advertisements[i].picture_url.substring(8) %>"></div>
+                                        <div class="col-md-6 mt-1">
+                                            <h5>product type: <%= locals.advertisements[i].type %></h5>
+                                            <% if (locals.advertisements[i].type == 'meat') { %>
+                                                <div class="mt-1 mb-1"><span>price per kg: <%= locals.advertisements[i].price_per_kg %><br></span></div>
+                                            <% }else{ %>
+                                                <div class="mt-1 mb-1"><span>price per piece: <%= locals.advertisements[i].selling_price_per_piece %><br></span></div>
+                                            <% } %>
+                                            
+                                            <div class="mt-1 mb-1 "><span>Quantity :  <%= locals.advertisements[i].quantity %> <br></span></div>
+                                            <p class="text-justify text-truncate para mb-0"> Seller ID : <%= locals.advertisements[i].seller_id %></p>
+                                        </div>
+                                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <% if (locals.advertisements[i].type == 'meat') { %>
+                                                    <h4 class="mr-1"> Total Price : <%= locals.advertisements[i].quantity*locals.advertisements[i].price_per_kg %> </h4>
+                                                <% }else{ %>
+                                                    <h4 class="mr-1"> Total Price : <%= locals.advertisements[i].quantity*locals.advertisements[i].selling_price_per_piece %> </h4>
+                                                <% } %>
+                                            </div>
+                                            <div class="d-flex flex-column mt-4"><a class="btn btn-primary" role="button" href="/singleAdvertisement/admin<%= locals.advertisements[i].advertise_id %>">View Details</a></div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            <% } %>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="/scripts/register.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
