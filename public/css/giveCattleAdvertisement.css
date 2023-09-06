@@ -1,0 +1,106 @@
+/* Apply global styles here */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensure the body covers the viewport height */
+    position: relative; /* Establish a positioning context for the footer */
+    background-color: #f0f0f0; /* Set a background color */
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif; /* Choose a font for the entire page */
+  }
+
+  .wrapper {
+    /* width: 700px;
+    margin: 0 auto; */
+    background-color: #f0f0f0;
+    /* padding: 10px; */
+  }
+
+  header, footer {
+    background-color: ghostwhite;
+    padding: 10px;
+  }
+
+
+  .logo {
+    background-image: url("../pictures/373454364_260518726818122_6762046698104647155_n.png");
+    width: 140px;
+    height: 70px; 
+    position: top;
+    background-repeat: no-repeat;
+    /*z-index: 3;*/
+    background-size: cover;
+    left: 5%;
+    /* border-radius: 50%; /* This will create a circular shape */
+    /* overflow: hidden; Clip any content that goes beyond the rounded corners */
+  }
+  
+  .container {
+    margin-top: 50px; /* Add some top margin for the container */
+  }
+
+  
+  /* Style the form elements */
+  .form-label {
+    font-weight: bold;
+  }
+  
+  /* Style the form input fields */
+  .form-control {
+    margin-bottom: 10px; /* Add spacing between form elements */
+  }
+  
+  /* Style the submit button */
+  .btn-primary {
+    background-color: #007bff; /* Change the primary button color */
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Change the button color on hover */
+  }
+  
+  /* Style the error messages */
+  #quantity_error,
+  #price_error,
+  #age_error0,
+  #weight_error0 {
+    font-weight: bold;
+  }
+  
+  /* Center the 'Cattle 1' heading */
+  h2 {
+    text-align: center;
+  }
+  
+  /* Apply more specific styles for your form elements as needed */
+  
+  /* Customize the form select elements */
+  .form-select {
+    width: 100%; /* Make selects fill their container */
+  }
+  
+  /* Style the file input fields */
+  input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  /* Add spacing to the submit button */
+  #submit {
+    margin-top: 10px;
+  }
+  
+  /* Apply specific styles for the buttons in the form */
+  .btn {
+    width: 15%;
+  }
+
+/* Position and style for the website logo */
+#website-logo {
+    position: fixed; /* Fix the logo position on the viewport */
+    top: 10px; /* Adjust the distance from the top */
+    left: 10px; /* Adjust the distance from the left */
+    width: 150px; /* Set the width of the logo */
+    height: 50px; /* Set the height of the logo */
+    /* Customize other styles as needed */
+  }
