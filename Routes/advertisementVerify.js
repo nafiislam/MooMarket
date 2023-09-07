@@ -16,7 +16,6 @@ router.get('/', async(req, res) => {
             // console.log(cattleAdvertisements.rows);
             const data = {session:req.session.phone_number,advertisements: meatAdvertisements.rows.concat( hoofAdvertisements.rows , hornAdvertisements.rows , cattleAdvertisements.rows , rawhideAdvertisements.rows ) }
             res.render('advertisementVerify',data)
-            console.log(req.session);
         }
         else{
             res.render('output',{msg:"You are not admin"})

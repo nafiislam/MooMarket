@@ -114,6 +114,9 @@
                             
                             <p class="text-justify text-truncate para mb-0"> Seller ID : <%= locals.advertisement.seller_id %></p>
                             <p class="text-justify text-truncate para mb-0"> Status : <%= locals.advertisement.status %></p>
+                            <% if (locals.advertisement.type == 'rawhide') { %>
+                                <p class="text-justify text-truncate para mb-0"> Preservation Style : <%= locals.advertisement.preservation_style %></p> 
+                            <% } %> 
                             <p class="text-justify text-truncate para mb-0"> Date of Storage : <%= new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(new Date(locals.advertisement.date_of_storage)) %></p>
                             <p class="text-justify text-truncate para mb-0"> Date of Expiry : <%= new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(new Date(locals.advertisement.date_of_expiry)) %></p>
                             <p class="text-justify text-truncate para mb-0"> Advertisement Published : <%= new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(new Date(locals.advertisement.created_at)) %></p>

@@ -6,15 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Give Advertisement</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/login.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/giveAdvertisement.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+
   </head>
+
   <body>
 
-    <div class="container">
+    <!-- <header class="col-auto">
+      <div class="logo col"></div>
+    </header> -->
+
+  <div class="col">
+    <div class="container background-image background-option1">
+      <div class="row">
+        <div class="col-md-2 side-bar side-bar-color-modification">
+            <div class="d-flex flex-column align-items-center h-100 p-2">
+              <img src="../pictures/373454364_260518726818122_6762046698104647155_n.png" alt="pic paina" class="logo-box">
+              
+              <br>
+              <a href="/seller/giveCattleAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>My Profile</h5></a>
+              <!-- Change Password Button with custom background color -->
+              <a href="/seller/giveCattleAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>Change Password</h5></a>
+
+              <!-- Give Advertisement Button with custom background color -->
+              <a href="/seller/giveCattleAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>Give Advertisement</h5></a>
+
+              <!-- My Advertisements Button with custom background color -->
+              <a href="/seller/myAdvertisements" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>My Advertisements</h5></a>
+              <a href="/seller/giveCattleAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>Order Posts</h5></a>
+              <a href="/seller/giveCattleAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>Accepted Order Posts</h5></a>
+          </div>
+        </div>
+
         <form class="col g-3" action="/seller/giveAdvertisement/type" method="post">
             <div class="col-auto">
-                <label for="Type" class="form-label">Type</label>
-                <select id="type" name="type" class="form-select" aria-label=".form-select"  required>
+                <label for="Type" class="form-label"><br><br>Select Type:</label>
+                <select id="type" name="type" class="form-select" aria-label=".form-select" required onchange="changeBackground(this)">              
                     <option value="meat">Meat</option>
                     <option value="cattle">Cattle</option>
                     <option value="rawhide">Rawhide</option>
@@ -23,12 +53,122 @@
                 </select>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                <button type="submit" class="btn btn-primary mb-5">Submit</button>
             </div>
         </form>
-    </div>
+      </div> 
+      </div>
+      </div>
+  </div>
+  
+  <div class="footer">
+    <footer class="bg-dark text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Twitter -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-twitter"></i
+          ></a>
+
+          <!-- Google -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-google"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-instagram"></i
+          ></a>
+
+          <!-- Linkedin -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+
+          <!-- Github -->
+          <a
+            class="btn btn-outline-light btn-floating m-1"
+            href="#!"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+      >
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/"
+          >MooMarket.com</a
+        >
+      </div>
+      <!-- Copyright -->
+    </footer>
+  </div>
+      <script>
+        // Function to change background based on selected option
+        function changeBackground(select) {
+            var selectedOption = select.value;
+            var container = document.querySelector('.container');
+            
+            // Remove any existing background classes
+            container.classList.remove('background-option1', 'background-option2', 'background-option3', 'background-option4', 'background-option5');
+    
+            // Add the appropriate background class based on the selected option
+            if (selectedOption === 'meat') {
+                container.classList.add('background-option1');
+            } 
+            else if (selectedOption === 'cattle') {
+                container.classList.add('background-option2');
+            }
+            else if(selectedOption == 'rawhide')
+            {
+              container.classList.add('background-option3');
+            }
+            else if (selectedOption === 'horn') {
+                container.classList.add('background-option4');
+            }
+            else if(selectedOption == 'hoof')
+            {
+              container.classList.add('background-option5');
+            }
+            // Add more conditions for other options as needed
+        }
+    </script>
+  
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/scripts/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+    src="https://kit.fontawesome.com/328bfce71b.js"
+    crossorigin="anonymous"
+  ></script>
   </body>
 </html>

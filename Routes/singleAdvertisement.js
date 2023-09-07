@@ -49,6 +49,53 @@ router.get('/seller/:id', async(req, res) => {
     res.render('singleAdvertisementSeller',{session:req.session.phone_number,advertisement:advertisement.rows[0]})
 })
 
+router.get('/seller/delete/:id', async(req, res) => {
+    if(req.session.phone_number){
+        if(req.session.type=="seller"){
+            const client = await pool.connect();
+            const advertisementSeller = await client.query("SELECT seller_id FROM advertisements WHERE advertise_id=$1 ", [req.params.id]);
+            if( advertisementSeller.rows.length == 0 ){
+                res.render('output',{msg:"request rejected!"})
+            }
+            const SellerID = await client.query("SELECT user_id FROM users WHERE phone_number=$1 ", [req.session.phone_number]);
+            // console.log(advertisementSeller.rows);
+            // console.log(SellerID.rows);
+            if( SellerID.rows[0].user_id != advertisementSeller.rows[0].seller_id ){
+                res.render('output',{msg:"request rejected!"})
+            }
+
+            const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
+            // console.log(type.rows);
+            if(type.rows[0].type=="meat"){
+                await client.query("DELETE FROM meat_advertisement WHERE advertise_id=$1", [req.params.id]);
+            }
+            else if(type.rows[0].type=="cattle"){
+                await client.query("DELETE FROM cattle WHERE cattle_advertise_id=$1", [req.params.id]);
+                await client.query("DELETE FROM cattle_advertisement WHERE advertise_id=$1", [req.params.id]);
+            }
+            else if(type.rows[0].type=="rawhide"){
+                await client.query("DELETE FROM rawhide_advertisement WHERE advertise_id=$1", [req.params.id]);
+            }
+            else if(type.rows[0].type=="horn"){
+                await client.query("DELETE FROM horn_advertisement WHERE advertise_id=$1", [req.params.id]);
+            }
+            else if(type.rows[0].type=="hoof"){
+                await client.query("DELETE FROM hoof_advertisement WHERE advertise_id=$1", [req.params.id]);
+            }
+            await client.query("DELETE FROM advertisements WHERE advertise_id=$1", [req.params.id]);
+            client.release(true);
+            res.redirect('/seller/myAdvertisements/')
+        }
+        else{
+            res.render('output',{msg:"You are not admin"})
+        }
+    }
+    else{
+        res.redirect('/login');
+    }
+})
+
+
 //Do not change...modified by ruhan
 router.get('/admin/:id', async(req, res) => {
 

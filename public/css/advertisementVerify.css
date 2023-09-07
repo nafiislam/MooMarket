@@ -15,7 +15,8 @@ body {
 }
 
 .product-image {
-    width: 100%
+    width: 100%;
+    border-radius: 0 40px 15px 40px;
 }
 
 .dot {
@@ -43,5 +44,78 @@ h5 {
 }
 
 .side-bar {
-    background: linear-gradient(to right, #563D7C, #7952B3); /* Change the colors as needed */
+    /* background: linear-gradient(to right, #563D7C, #7952B3); Change the colors as needed */
+    
 }
+
+.side-bar a{
+    background-color: #D6AD60;
+    border-color: #B68D40;
+    color: #F4EBD0;
+    transition: background-color 0.3s ease;
+}
+
+.side-bar a:hover{
+    background-color: #B68D40;
+    color: #122620;    
+}
+
+
+
+.card {
+    background-color: #f4fc65; /* Card background color */
+    color: rgb(67, 11, 11); /* Text color */
+    text-align: center; /* Center-align card content */
+    border-radius: 0 40px 15px 40px;
+  }
+  
+  .card:hover {
+    box-shadow: 8px 8px 10px 5px #4e1e00;
+    background-color: #e7f0dd;
+    color: #f21b0b;
+    cursor: pointer;
+  }
+
+  .side-bar-color-modification{
+    background-color: #122620;
+    opacity: 90%;
+  }
+
+  .logo-box {
+    max-width: 150px; /* Set the maximum desired width for your image */
+    max-height: 70px; /* Set the maximum desired height for your image */
+    width: auto; /* Let the width adjust to fit the aspect ratio */
+    height: auto; /* Let the height adjust to fit the aspect ratio */
+  }
+
+  .background-image {
+    background-image: url("../pictures/give-advertisement-bg.jpeg"); /* Replace 'your-image.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Put the background image behind other content */
+    background-color: rgba(0, 0, 0, 0.2); /* 50% transparent black background */
+  }
+  
+  .background-option1 {
+    background-image: url('../pictures/give-advertisement-bg.jpeg');
+  }
+  
+  .background-option2 {
+    background-image: url('../pictures/give-advertisement-bg-cattle.jpeg');
+  }
+  
+  .background-option3 {
+    background-image: url('../pictures/give-advertisement-bg-rawhides.webp');
+  }
+  
+  .background-option4 {
+    background-image: url('../pictures/give-advertisement-horn.jpeg');
+  }
+  
+  .background-option5 {
+    background-image: url('../pictures/give-advertisement-hoof.jpeg');
+  }
