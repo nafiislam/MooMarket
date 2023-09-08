@@ -85,48 +85,74 @@ router.get('/', async(req, res) => {
     else{
       res.redirect('/coordinates')
     }
-    
 })
 
 router.get('/category/:category', async(req, res) => {
+  if(req.cookies['thana']){
+    const thana = req.cookies['thana']
     var meatAdvertisements,cattleAdvertisements,rawhideAdvertisements,hornAdvertisements,hoofAdvertisements;
     if(req.params.category=="meat"){
         const client = await pool.connect();
-        meatAdvertisements = await client.query("SELECT * FROM advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id");
+        meatAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (select * from advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<meatAdvertisements.rows.length;i++){
+          meatAdvertisements.rows[i].created_at=formatDate(JSON.stringify(meatAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        }
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows}) 
     }
     else if(req.params.category=="cattle"){
         const client = await pool.connect();
-        cattleAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=false ) AS y");
+        cattleAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=false ) AS y) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<cattleAdvertisements.rows.length;i++){
+          cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        }
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows}) 
     }
     else if(req.params.category=="cattleBid"){
         const client = await pool.connect();
-        cattleAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=true ) AS y");
+        cattleAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=true ) AS y) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<cattleAdvertisements.rows.length;i++){
+          cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        }
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows}) 
     }
     else if(req.params.category=="rawhide"){
         const client = await pool.connect();
-        rawhideAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement");
+        rawhideAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN rawhide_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<rawhideAdvertisements.rows.length;i++){
+          rawhideAdvertisements.rows[i].created_at=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+          rawhideAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+        }
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:rawhideAdvertisements.rows}) 
     }
     else if(req.params.category=="horn"){
         const client = await pool.connect();
-        hornAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN horn_advertisement");
+        hornAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN horn_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<hornAdvertisements.rows.length;i++){
+          hornAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hornAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+          hornAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hornAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+        }
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hornAdvertisements.rows}) 
     }
     else if(req.params.category=="hoof"){
         const client = await pool.connect();
-        hoofAdvertisements = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement");
+        hoofAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN hoof_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true",[thana]);
         client.release(true);
+        for(var i=0;i<hoofAdvertisements.rows.length;i++){
+          hoofAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hoofAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+          hoofAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hoofAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+        }
+        console.log(hoofAdvertisements.rows)
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows}) 
     }
-  
+  }
+  else{
+    res.redirect('/coordinates')
+  }
 })
 
 module.exports = router;
