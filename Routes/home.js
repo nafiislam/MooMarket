@@ -33,8 +33,7 @@ function formatDate(inputDate) {
     const formattedDate = `${getDayWithSuffix(day)} ${month}, ${year}`;
     return formattedDate;
   }
-  
-  
+
 router.get('/', async(req, res) => {
     if(req.cookies['thana']){
       const thana = req.cookies['thana']
@@ -146,7 +145,6 @@ router.get('/category/:category', async(req, res) => {
           hoofAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hoofAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
           hoofAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hoofAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
         }
-        console.log(hoofAdvertisements.rows)
         res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows}) 
     }
   }
