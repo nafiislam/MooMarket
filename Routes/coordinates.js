@@ -16,4 +16,10 @@ router.post('/', async(req, res) => {
     res.send(coordinates.rows)
 })
 
+router.post('/submit', async(req, res) => {
+    const {thana} = req.body;
+    res.cookie('thana',thana,{maxAge: 1*60*60*1000,httpOnly: true})
+    res.redirect('/')
+})
+
 module.exports = router;

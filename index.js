@@ -28,6 +28,9 @@ const nodemailer=require('nodemailer');
 const multer=require("multer");
 const jwt = require('jsonwebtoken');
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 const homeRouter = require('./Routes/home');
 app.use('/',homeRouter);
 

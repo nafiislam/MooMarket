@@ -12,6 +12,7 @@
   <body>
     <div id="map" style="width: 100%; height: 500px"></div>
     <div class="container floating-div">
+      <form class="col g-3" action="/coordinates/submit" method="post">
         <div class="col-auto">
             <label for="District" class="form-label">District</label>
             <select id="district" name="district" class="form-select" aria-label=".form-select" onchange="districtHandler()"  required>
@@ -22,7 +23,11 @@
             <label for="Thana" class="form-label">Thana</label>
             <select id="thana" name="thana" class="form-select" aria-label=".form-select" onchange="thanaHandler()"  required>
             </select>
-        </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+          </div>
+        </form>
     </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/scripts/coordinates.js"></script>

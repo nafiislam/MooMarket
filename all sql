@@ -124,7 +124,7 @@ CREATE TABLE Hoof_Advertisement(
 
 CREATE TABLE Rating (
     rating integer NOT NULL,
-    buyer_id integer REFERENCES Buyer(user_id),
+    buyer_id integer REFERENCES Users(user_id),
     advertise_id integer REFERENCES Advertisements(advertise_id),
     PRIMARY KEY (buyer_id, advertise_id)
 );

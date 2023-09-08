@@ -5,7 +5,7 @@ html {
   padding: 0;
   min-height: 100vh; /* Ensure the body covers the viewport height */
   position: relative; /* Establish a positioning context for the footer */
-  background-image: url("background.jpg");
+  background-image: url("../pictures/background.jpg");
   background-size: cover;
   background-position: center;
   /* position: fixed; */

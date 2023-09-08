@@ -27,10 +27,11 @@ router.post('/', async(req, res) => {
             client.release(true);
             if(verified.rows[0].verified == true){
                 const client = await pool.connect();
-                var type = await client.query('select type from Users WHERE phone_number=$1',[phone_number]);
+                var type = await client.query('select type,thana.name from Users join thana on Users.thana_id=thana.thana_id WHERE phone_number=$1',[phone_number]);
                 client.release(true);
                 req.session.phone_number = phone_number;
                 req.session.type = type.rows[0].type;
+                res.cookie('thana',type.rows[0].name,{maxAge: 1*60*60*1000,httpOnly: true})
                 res.render('output',{msg:"Login successful"})
             }
             else{
