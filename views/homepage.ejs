@@ -168,7 +168,15 @@
             <h1 style="margin-top: 30px;">Type: <%=locals.bestMeat.type%></h1>
             <p style="opacity: 0.8; font-size: 20px;">Price per kg: <%=locals.bestMeat.price_per_kg %> BDT</p>
             <p style="opacity: 0.8; font-size: 20px;">Date of storage: <%=locals.bestMeat.date_of_storage %></p>
-            <p style="opacity: 0.7; font-size: 15px;">Advertised at: <%=locals.bestMeat.created_at%></p>
+            <p style="opacity: 0.7; font-size: 20px;">Advertised at: <%=locals.bestMeat.created_at%></p>
+            <p style="opacity: 0.7; font-size: 20px;">
+            <% if(locals.bestMeat.status=="unfinished"){ %>
+              <span style="color:green"><br>Status: Available</span>
+              <br>Quantity available: <%=locals.bestMeat.quantity%>
+            <%}else{%>
+              <span style="color:red"><br>Status: Not available</span>
+            <% } %>
+          </p>
           </div>
         </div>
       </a>
@@ -181,7 +189,14 @@
           <h1 style="margin-top: 30px;">Farm name: <%= locals.bestCattle.farm_name %></h1>
           <p style="opacity: 0.8; font-size: 20px;">Quantity: <%= locals.bestCattle.quantity %></p>
           <p style="opacity: 0.8; font-size: 20px;">Price: <%= locals.bestCattle.price %> BDT</p>
-          <p style="opacity: 0.7; font-size: 15px;">Advertised at: <%=locals.bestCattle.created_at%></p>
+          <p style="opacity: 0.7; font-size: 20px;">Advertised at: <%=locals.bestCattle.created_at%></p>
+          <p style="opacity: 0.7; font-size: 20px;">
+            <% if(locals.bestCattle.status=="unfinished"){ %>
+              <span style="color:green"><br>Status: Available</span>
+            <%}else{%>
+              <span style="color:red"><br>Status: Not available</span>
+            <% } %>
+          </p>
         </div>
         
         <div class="col-5">
@@ -212,11 +227,17 @@
           <% if(!locals.cattleAdvertisements[i].is_bid) { %>
         <a href="/singleAdvertisement/buyer/<%= locals.cattleAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
           <div class="card">
-            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 150px;">
+            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
             <div class="card-body">
               <h5 class="card-title">Fixed price: <%=locals.cattleAdvertisements[i].price%> BDT</h5>
               <p>Farm name: <%=locals.cattleAdvertisements[i].farm_name%><br>
-              Quantity: <%=locals.cattleAdvertisements[i].quantity%></p>
+              Quantity: <%=locals.cattleAdvertisements[i].quantity%>
+              <% if(locals.cattleAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
+            </p>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.cattleAdvertisements[i].created_at%></small>
@@ -250,7 +271,14 @@
             <img src="<%=locals.meatAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit; width: 325px; height: 200px;">
             <div class="card-body">
               <h5 class="card-title">Selling price per kg: <%=locals.meatAdvertisements[i].price_per_kg%> BDT</h5>
-              <p>Type: <%=locals.meatAdvertisements[i].type%></p>
+              <p>Type: <%=locals.meatAdvertisements[i].type%>
+                <% if(locals.meatAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.meatAdvertisements[i].quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.meatAdvertisements[i].created_at%></small>
@@ -283,7 +311,14 @@
             <img src="<%=locals.rawhideAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
             <div class="card-body">
               <h5 class="card-title">Selling price per piece: <%=locals.rawhideAdvertisements[i].selling_price_per_piece%> BDT</h5>
-              <p>Preservation style: <%=locals.rawhideAdvertisements[i].preservation_style%></p>
+              <p>Preservation style: <%=locals.rawhideAdvertisements[i].preservation_style%>
+                <% if(locals.rawhideAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.rawhideAdvertisements[i].quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.rawhideAdvertisements[i].created_at%></small>
@@ -317,6 +352,12 @@
             <div class="card-body">
               <h5 class="card-title">Selling price per piece: <%=locals.hornAdvertisements[i].selling_price_per_piece%> BDT</h5>
               Storage date: <%=locals.hornAdvertisements[i].date_of_storage%>
+              <% if(locals.hornAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+                <br>Quantity available: <%=locals.hornAdvertisements[i].quantity%>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.hornAdvertisements[i].created_at%></small>
@@ -350,6 +391,12 @@
             <div class="card-body">
               <h5 class="card-title">Selling price per piece: <%=locals.hoofAdvertisements[i].selling_price_per_piece%> BDT</h5>
               Storage date: <%=locals.hoofAdvertisements[i].date_of_storage%>
+              <% if(locals.hoofAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+                <br>Quantity available: <%=locals.hoofAdvertisements[i].quantity%>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.hoofAdvertisements[i].created_at%></small>
@@ -380,11 +427,17 @@
           <% if(locals.cattleAdvertisements[i].is_bid) { %>
         <a href="/singleAdvertisement/buyer/<%= locals.cattleAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
           <div class="card">
-            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 150px;">
+            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
             <div class="card-body">
               <h5 class="card-title">Minimum bid price: <%=locals.cattleAdvertisements[i].price%> BDT</h5>
               <p>Farm name: <%=locals.cattleAdvertisements[i].farm_name%></p>
-              <p>Quantity: <%=locals.cattleAdvertisements[i].quantity%></p>
+              <p>Quantity: <%=locals.cattleAdvertisements[i].quantity%>
+                <% if(locals.cattleAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
             </div>
             <div class="card-footer">
               <small class="text-muted">Advertised at: <%=locals.cattleAdvertisements[i].created_at%></small>

@@ -305,22 +305,21 @@ input[type="search"]:focus {
 
 
 .card-wrap {
-  height: 430px;
+  height: 500px;
   width: 80%;
   /* margin-left: 10%;
   margin-right: 10%; */
   margin: 0 auto;
   background-color: rgb(224, 223, 150);
-  
 }
 
 .card-container {
-  height: 360px;
+  height: 400px;
 }
 
 .card {
   min-width: 300px; /* Adjust the card width as needed */
-  height: 340px; /* Adjust the card height as needed */
+  height: 400px; /* Adjust the card height as needed */
   background-color: #f4fc65; /* Card background color */
   color: rgb(67, 11, 11); /* Text color */
   text-align: center; /* Center-align card content */
