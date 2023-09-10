@@ -55,13 +55,13 @@ router.get('/seller/delete/:id', async(req, res) => {
             const client = await pool.connect();
             const advertisementSeller = await client.query("SELECT seller_id FROM advertisements WHERE advertise_id=$1 ", [req.params.id]);
             if( advertisementSeller.rows.length == 0 ){
-                res.render('output',{msg:"request rejected!"})
+                res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"request rejected!"})
             }
             const SellerID = await client.query("SELECT user_id FROM users WHERE phone_number=$1 ", [req.session.phone_number]);
             // console.log(advertisementSeller.rows);
             // console.log(SellerID.rows);
             if( SellerID.rows[0].user_id != advertisementSeller.rows[0].seller_id ){
-                res.render('output',{msg:"request rejected!"})
+                res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"request rejected!"})
             }
 
             const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
@@ -87,7 +87,7 @@ router.get('/seller/delete/:id', async(req, res) => {
             res.redirect('/seller/myAdvertisements/')
         }
         else{
-            res.render('output',{msg:"You are not admin"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not admin"})
         }
     }
     else{
@@ -122,10 +122,10 @@ router.get('/admin/:id', async(req, res) => {
                 advertisement = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertise_id=$1", [req.params.id]);
             }
             client.release(true);
-            console.log(advertisement.rows);
+            //console.log(advertisement.rows);
 
             if( type.rows[0].type=="cattle" ){
-                console.log(cattle.rows);
+                //console.log(cattle.rows);
                 res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type,cattle:cattle.rows})
             }
             else{
@@ -133,7 +133,7 @@ router.get('/admin/:id', async(req, res) => {
             }
         }
         else{
-            res.render('output',{msg:"You are not admin"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not admin"})
         }
     }
     else{
@@ -164,10 +164,10 @@ router.get('/admin/reject/:id', async(req, res) => {
             }
             await client.query("DELETE FROM advertisements WHERE advertise_id=$1", [req.params.id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement Rejected"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement Rejected"})
         }
         else{
-            res.render('output',{msg:"You are not admin"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not admin"})
         }
     }
     else{
@@ -181,10 +181,10 @@ router.get('/admin/accept/:id', async(req, res) => {
             const client = await pool.connect();
             await client.query("UPDATE advertisements set verified=true WHERE advertise_id=$1", [req.params.id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement accepted"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement accepted"})
         }
         else{
-            res.render('output',{msg:"You are not admin"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not admin"})
         }
     }
     else{

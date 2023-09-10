@@ -19,7 +19,7 @@ router.get('/', async(req, res) => {
             res.render('myAdvertisements',data) 
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{

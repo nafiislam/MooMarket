@@ -24,23 +24,71 @@
           <a class="navbar-brand" href="/"><img src="pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
 
           <!-- Middle Section: Search Bar -->
-          <form>
-            <input type="search" placeholder="Search...">
-            <button type="submit">Search</button>
-          </form>
+          <div class="search">
+            <form>
+              <input id ="search" type="search" placeholder="Search..." oninput="searchHandler()">
+              <button type="submit">Search</button>
+            </form>
+            <div class="results" style="color: #fff;">
+              <!-- <ul>
+                <li>nafi</li>
+                <li>ruhan</li>
+                <li>nafi</li>
+                <li>ruhan</li>
+                <li>nafi</li>
+                <li>ruhan</li>
+              </ul> -->
+            </div>
+          </div>
+          <script>
+            let arr =["Nafi","Nahin","Ruhan","sobaha","Suvro","Rashid"]
+            var searchBar = document.getElementById('search');
+            var results = document.querySelector('.results');
 
+            const searchHandler = ()=>{
+              var input = searchBar.value;
+              if(input!=""){
+                var suggestions = arr.filter((data)=>{
+                  return data.toLowerCase().startsWith(input.toLowerCase());
+                })
+                var html = suggestions.map((data)=>{
+                  return `<li onclick="clickHandler(this)">${data}</li>`
+                })
+                results.innerHTML =  `<ul>${html}</ul>`;
+              }
+              else{
+                results.innerHTML = '';
+              }
+            }
+            const clickHandler = (obj)=>{
+              searchBar.value=obj.innerHTML;
+              results.innerHTML='';
+            }
+          </script>
           <!-- Right Section: Login and Register Buttons -->
           <div class="ml-auto">
-              <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i><%=locals.thana%></button></a>
-                <% if(typeof locals.session === 'undefined'){%>
-                  <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button></a>
-                  <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button></a>
-                <% }else{ %>
-                  <% if(locals.type=="seller"){ %>
-                    <a href="/seller/giveAdvertisement" class="button"><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Give Advertisement</button></a>
-                  <% }%>
-                  <a href="/logout" class="button"><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Logout</button></a>
-                <% }%>
+            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i><%=locals.thana%></button></a>
+            
+            <% if(typeof locals.session === 'undefined'){%>
+              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button></a>
+            <% }else{ %>
+            
+            <div class="btn-group">
+              <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                Dashboard
+              </button>
+              <ul class="dropdown-menu" style="background-color: #000000;">
+                <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                <% if(locals.type=="seller"){ %>
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
+                <% }else if(locals.type=="admin"){%>
+                  <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                <% } %>
+                <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+              </ul>
+            </div>
+            <% }%>
           </div>
       </div>
   </nav>

@@ -7,17 +7,24 @@ const nodemailer=require('nodemailer');
 const { pool } = require("../db");
 
 router.get('/', async(req, res) => {
-    res.render('login')
+    if(req.session.phone_number)
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+    else
+        res.render('login')
 })
 
 router.post('/', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     var {phone_number, password} = req.body;
 
     const client = await pool.connect();
     const r = await client.query('SELECT password FROM Users WHERE phone_number=$1', [phone_number]);
     client.release(true)
     if(r.rows.length == 0){
-        res.render('output',{msg:"This phone number is not registered"})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"This phone number is not registered"})
         return;
     }
     bcrypt.compare(password,r.rows[0].password , async function(err, result) {
@@ -32,30 +39,38 @@ router.post('/', async(req, res) => {
                 req.session.phone_number = phone_number;
                 req.session.type = type.rows[0].type;
                 res.cookie('thana',type.rows[0].name,{maxAge: 1*60*60*1000,httpOnly: true})
-                res.render('output',{msg:"Login successful"})
+                res.redirect('/');
             }
             else{
-                res.render('output',{msg:"Please verify your email"})
+                res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Please verify your email"})
             }
         }
         else{
-            res.render('output',{msg:"Login failed"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Login failed"})
         }
     });
 })
 
 
 router.get('/forgetPassword', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     res.render('forgetPassword')
 })
 
 router.post('/forgetPassword', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     var {phone_number} = req.body;
 
     const client = await pool.connect();
     var email = await client.query('select email from Users WHERE phone_number=$1',[phone_number]);
     if(email.rows.length == 0){
-        res.render('output',{msg:"This phone number is not registered"})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"This phone number is not registered"})
         return;
     }
     email = email.rows[0].email;
@@ -144,10 +159,10 @@ router.post('/forgetPassword', async(req, res) => {
         </html>`,
     }).catch(err =>{
         console.log(err)
-        res.render('output',{msg:`Email was wrong`})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`Email was wrong`})
         return
     }); 
-    res.render('output',{msg:`Check email`})
+    res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`Check email`})
 })
 
 function getRndInteger(min, max) {
@@ -155,6 +170,10 @@ function getRndInteger(min, max) {
 }
 
 router.get('/forgetPassword/verify/:token',async(req,res)=> {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     try{
         const{phone_number}=jwt.verify(req.params.token,process.env.JWT_SECRET);
         var newPassword = (getRndInteger(0,8)+1).toString() +(getRndInteger(0,9)).toString() +(getRndInteger(0,9)).toString() +(getRndInteger(0,9)).toString() +(getRndInteger(0,9)).toString() +(getRndInteger(0,9)).toString()
@@ -164,10 +183,10 @@ router.get('/forgetPassword/verify/:token',async(req,res)=> {
         const client = await pool.connect();
         await client.query('UPDATE Users SET password=$1 WHERE phone_number=$2',[newPasswordHash,phone_number]);
         client.release(true);
-        res.render('output',{msg:`New password: ${newPassword}`})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`New password: ${newPassword}`})
     }
     catch(e){
-        res.render('output',{msg:`Token is invalid`})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`Token is invalid`})
         return
     }
 })

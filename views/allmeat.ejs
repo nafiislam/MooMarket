@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+    rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/alladd.css">
+  </head>
+  <body>
+        <!-- ....................................................NAVBAR.......................................................... -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <!-- Logo on the left -->
+                <a class="navbar-brand" href="#"><img src="/pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
+      
+                <!-- Middle Section: Search Bar -->
+                <form>
+                  <input type="search" placeholder="Search...">
+                  <button type="submit">Search</button>
+                </form>
+      
+                <!-- Right Section: Login and Register Buttons -->
+                <div class="ml-auto">
+                    <button class="login mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i>Dhaka</button>
+                    <button class="login1 mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button>
+                    <button class="login1 mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button>
+                </div>
+            </div>
+        </nav>
+          <!-- ....................................................END NAVBAR.......................................................... -->
+
+          <div class="content-container">
+            <div class="navbarside">
+                <ul>
+                    <a href="alllcattle.html"><li class="passivelist"><i>All Cattles</i></li></a>
+                    <a><li class="activelist"><i>All Meats</i></li></a>
+                    <a href="allauction.html"><li class="passivelist"><i>All Auctions</i></li></a>
+                    <a href="allhorn.html"><li class="passivelist"><i>All Horns</i></li></a>
+                    <a href="allhoof.html"><li class="passivelist"><i>All Hoofs</i></li></a>
+                </ul>
+            </div>
+            <div class="content">
+
+              <div class="accordion accordion-flush">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      <i>SORT OR FILTER ITEMS...</i>
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div class="row">
+                        <div class="col-4">
+                          <div class="wrapper">
+                            <header><h6><i>Price(BDT)</i></h6></header>
+                            <div class="price-input1">
+                              <div class="field1">
+                                <span><i>Min</i></span>
+                                <input type="number" class="input-min1" value="10000">
+                              </div>
+                              <div class="separator1">-</div>
+                              <div class="field1">
+                                <span><i>Max</i></span>
+                                <input type="number" class="input-max1" value="30000">
+                              </div>
+                            </div>
+                            <div class="slider1">
+                              <div class="progress1"></div>
+                            </div>
+                            <div class="range-input1">
+                              <input type="range" class="range-min1" min="0" max="40000" value="10000" step="100">
+                              <input type="range" class="range-max1" min="0" max="40000" value="30000" step="100">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="wrapper">
+                            <header><h6><i>Weight (kg)</i></h6></header>
+                            <div class="price-input2">
+                              <div class="field2">
+                                <span><i>Min</i></span>
+                                <input type="number" class="input-min2" value="25">
+                              </div>
+                              <div class="separator2">-</div>
+                              <div class="field2">
+                                <span><i>Max</i></span>
+                                <input type="number" class="input-max2" value="75">
+                              </div>
+                            </div>
+                            <div class="slider2">
+                              <div class="progress2"></div>
+                            </div>
+                            <div class="range-input2">
+                              <input type="range" class="range-min2" min="0" max="100" value="25" step="0.5">
+                              <input type="range" class="range-max2" min="0" max="100" value="75" step="0.5">
+                            </div>
+                          </div>
+                        </div> 
+                         <div class="col-4">
+                          <div class="wrapper">
+                            <header><h6><i>Last Arrival (days)</i></h6></header>
+                            <div class="price-input3">
+                              <div class="field3">
+                                <span><i>Min</i></span>
+                                <input type="number" class="input-min3" value="25">
+                              </div>
+                              <div class="separator3">-</div>
+                              <div class="field3">
+                                <span><i>Max</i></span>
+                                <input type="number" class="input-max3" value="75">
+                              </div>
+                            </div>
+                            <div class="slider3">
+                              <div class="progress3"></div>
+                            </div>
+                            <div class="range-input3">
+                              <input type="range" class="range-min3" min="0" max="100" value="25" step="1">
+                              <input type="range" class="range-max3" min="0" max="100" value="75" step="1">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-5">
+                        <div class="col-4 bar" style="text-align: center;">
+                          <h5><i>Search Meat by FARM names</i></h5>
+                          <select id="farmList" class="selectpicker" multiple>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                            <option value="5">five</option>
+                            <option value="6">six</option>
+                            <option value="7">seven</option>
+                            <option value="8">eight</option>
+                            <option value="9">nine</option>
+                            <option value="10">ten</option>
+                          </select>
+                        </div>
+
+                        <div class="col-4 bar" style="text-align: center;">
+                            <h5><i>Search Meat by Body Parts</i></h5>
+                            <select id="partList" class="selectpicker" multiple>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                              <option value="4">Four</option>
+                              <option value="5">five</option>
+                              <option value="6">six</option>
+                              <option value="7">seven</option>
+                              <option value="8">eight</option>
+                              <option value="9">nine</option>
+                              <option value="10">ten</option>
+                            </select>
+                          </div>
+
+                        <div class="col-4">
+                          <h6>Sort by -</h6>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              <span>Default</span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              <span>Price [High -> Low]</span>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              <span>Price [Low -> High]</span>
+                            </label>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <!-- Your webpage content goes here -->
+                <div class="alladd">
+                  <h1>Welcome to All Meat Page</h1>
+
+                    
+
+
+
+
+
+
+                  <div id="all" class="card-wrap" data-aos="fade-up">
+              
+                    <div class="card-container d-flex flex-row flex-wrap">
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>       
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>         
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>         
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>         
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>         
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>         
+                      <a href="#" class="cardLink" style="text-decoration: none">
+                        <div class="card">
+                          <img src="/pictures/hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
+                          <div class="card-body">
+                            <h5 class="card-title">1,00,000 BDT</h5>
+                            <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
+                          </div>
+                          <div class="card-footer">
+                            <small class="text-muted">Advertised 10 hours ago</small>
+                          </div>
+                        </div>
+                      </a>             
+                    </div>
+                  </div>                  
+
+
+
+
+
+
+
+                    
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+              <!-- ....................................................FOOTER.......................................................... -->
+    <div class="footer">
+        <footer class="bg-dark text-center text-white">
+          <!-- Grid container -->
+          <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+              <!-- Facebook -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+  
+              <!-- Twitter -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-twitter"></i
+              ></a>
+  
+              <!-- Google -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-google"></i
+              ></a>
+  
+              <!-- Instagram -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-instagram"></i
+              ></a>
+  
+              <!-- Linkedin -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+  
+              <!-- Github -->
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                href="#!"
+                role="button"
+                ><i class="fab fa-github"></i
+              ></a>
+            </section>
+            <!-- Section: Social media -->
+          </div>
+          <!-- Grid container -->
+  
+          <!-- Copyright -->
+          <div
+            class="text-center p-3"
+            style="background-color: rgba(0, 0, 0, 0.2)"
+          >
+            © 2020 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/"
+              >MooMarket.com</a
+            >
+          </div>
+          <!-- Copyright -->
+        </footer>
+      </div>
+      <!-- ....................................................END FOOTER.......................................................... -->
+
+
+    <script>
+      const button = document.getElementById('myButton');
+      let isClicked = false;
+
+      button.addEventListener('click', function() {
+          if (isClicked) {
+              // Toggle off the 'clicked' class when the button is clicked again
+              button.classList.remove('clicked');
+          } else {
+              // Toggle on the 'clicked' class when the button is initially clicked
+              button.classList.add('clicked');
+          }
+          
+          // Update the clicked state
+          isClicked = !isClicked;
+      });
+
+
+
+
+
+      const rangeInput = document.querySelectorAll(".range-input1 input"),
+      priceInput = document.querySelectorAll(".price-input1 input"),
+      range = document.querySelector(".slider1 .progress1");
+      let priceGap = 2000;
+
+      priceInput.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minPrice = parseInt(priceInput[0].value),
+              maxPrice = parseInt(priceInput[1].value);
+              
+              if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+                  if(e.target.className === "input-min1"){
+                      rangeInput[0].value = minPrice;
+                      range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                  }else{
+                      rangeInput[1].value = maxPrice;
+                      range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                  }
+              }
+          });
+      });
+
+      rangeInput.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minVal = parseInt(rangeInput[0].value),
+              maxVal = parseInt(rangeInput[1].value);
+
+              if((maxVal - minVal) < priceGap){
+                  if(e.target.className === "range-min1"){
+                      rangeInput[0].value = maxVal - priceGap
+                  }else{
+                      rangeInput[1].value = minVal + priceGap;
+                  }
+              }else{
+                  priceInput[0].value = minVal;
+                  priceInput[1].value = maxVal;
+                  range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+                  range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+              }
+          });
+      });
+
+
+
+      const rangeInput1 = document.querySelectorAll(".range-input2 input"),
+      weightInput = document.querySelectorAll(".price-input2 input"),
+      range1 = document.querySelector(".slider2 .progress2");
+      let weightGap = 2;
+
+      weightInput.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minWeight = parseInt(weightInput[0].value),
+              maxWeight = parseInt(weightInput[1].value);
+              
+              if((maxWeight - minWeight >= weightGap) && maxWeight <= rangeInput1[1].max){
+                  if(e.target.className === "input-min2"){
+                      rangeInput1[0].value = minWeight;
+                      range1.style.left = ((minWeight / rangeInput1[0].max) * 100) + "%";
+                  }else{
+                      rangeInput1[1].value = maxWeight;
+                      range1.style.right = 100 - (maxWeight / rangeInput1[1].max) * 100 + "%";
+                  }
+              }
+          });
+      });
+
+      rangeInput1.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minVal = parseInt(rangeInput1[0].value),
+              maxVal = parseInt(rangeInput1[1].value);
+
+              if((maxVal - minVal) < weightGap){
+                  if(e.target.className === "range-min2"){
+                    rangeInput1[0].value = maxVal - weightGap
+                  }else{
+                    rangeInput1[1].value = minVal + weightGap;
+                  }
+              }else{
+                  weightInput[0].value = minVal;
+                  weightInput[1].value = maxVal;
+                  range1.style.left = ((minVal / rangeInput1[0].max) * 100) + "%";
+                  range1.style.right = 100 - (maxVal / rangeInput1[1].max) * 100 + "%";
+              }
+          });
+      });
+
+
+      const rangeInput2 = document.querySelectorAll(".range-input3 input"),
+      ageInput = document.querySelectorAll(".price-input3 input"),
+      range2 = document.querySelector(".slider3 .progress3");
+      let ageGap= 2;
+
+      ageInput.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minAge = parseInt(ageInput[0].value),
+              maxAge = parseInt(ageInput[1].value);
+              
+              if((maxAge - minAge >= ageGap) && maxAge <= rangeInput2[1].max){
+                  if(e.target.className === "input-min3"){
+                      rangeInput2[0].value = minAge;
+                      range2.style.left = ((minAge / rangeInput2[0].max) * 100) + "%";
+                  }else{
+                      rangeInput2[1].value = maxAge;
+                      range2.style.right = 100 - (maxAge / rangeInput2[1].max) * 100 + "%";
+                  }
+              }
+          });
+      });
+
+      rangeInput2.forEach(input =>{
+          input.addEventListener("input", e =>{
+              let minVal = parseInt(rangeInput2[0].value),
+              maxVal = parseInt(rangeInput2[1].value);
+
+              if((maxVal - minVal) < ageGap){
+                  if(e.target.className === "range-min3"){
+                    rangeInput2[0].value = maxVal - ageGap
+                  }else{
+                    rangeInput2[1].value = minVal + ageGap;
+                  }
+              }else{
+                  ageInput[0].value = minVal;
+                  ageInput[1].value = maxVal;
+                  range2.style.left = ((minVal / rangeInput2[0].max) * 100) + "%";
+                  range2.style.right = 100 - (maxVal / rangeInput2[1].max) * 100 + "%";
+              }
+          });
+      });
+
+
+
+
+    </script>  
+
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+    <script>
+      // document.addEventListener("DOMContentLoaded", function () {
+        // Initialize MultiSelectTag for multi-select functionality
+        new MultiSelectTag('farmList', {
+          placeholder: 'Search',  // default Search...
+          onChange: function(values) {
+            
+              console.log(values)
+          }
+        });
+      // });
+    </script>
+
+<script>
+    // document.addEventListener("DOMContentLoaded", function () {
+      // Initialize MultiSelectTag for multi-select functionality
+      new MultiSelectTag('partList', {
+        placeholder: 'Search',  // default Search...
+        onChange: function(values) {
+          
+            console.log(values)
+        }
+      });
+    // });
+  </script>
+
+
+
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
+    ></script>
+
+    <script src="https://kit.fontawesome.com/328bfce71b.js" crossorigin="anonymous"></script>
+  </body>
+</html>

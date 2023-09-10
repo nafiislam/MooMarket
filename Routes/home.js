@@ -153,4 +153,8 @@ router.get('/category/:category', async(req, res) => {
   }
 })
 
+router.get('/search', async(req, res) => {
+  res.render('allmeat')
+})
+
 module.exports = router;

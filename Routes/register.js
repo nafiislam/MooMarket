@@ -16,12 +16,24 @@ const { pool } = require("../db");
 const otpMap = new Map();
 
 router.get('/', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     res.render('buyerRegister') 
 })
 router.get('/seller', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     res.render('sellerRegister') 
 })
 router.get('/buyer', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     res.render('buyerRegister') 
 })
 
@@ -53,17 +65,21 @@ function getRndInteger(min, max) {
 
 
 router.post('/buyersubmit', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     var {name, email, password, phone_number, birth_date, thana, delivery_address,nid,otp} = req.body;
 
     try{
         const {otp_pin} = jwt.verify(otpMap.get(phone_number),process.env.JWT_SECRET)
         if(otp_pin != otp){
-            res.render('output',{msg:'OTP mismatch'})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'OTP mismatch'})
             return;
         }
     }
     catch(e){
-        res.render('output',{msg:'OTP has timed out'})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'OTP has timed out'})
         return
     }
 
@@ -153,7 +169,7 @@ router.post('/buyersubmit', async(req, res) => {
         </html>`,
     }).catch(err =>{
         console.log(err)
-        res.render('output',{msg:`Email was wrong`})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`Email was wrong`})
         return
     }); 
 
@@ -165,21 +181,25 @@ router.post('/buyersubmit', async(req, res) => {
     else
         await client.query('INSERT INTO Buyer(delivery_address,user_id) VALUES ($1,$2)', [delivery_address,user_id.rows[0].user_id]);
     client.release(true)
-    res.render('output',{msg:'Buyer Registration successful'}) 
+    res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'Buyer Registration successful'}) 
 })
 
 router.post('/sellersubmit', async(req, res) => {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     var {name, email, password, phone_number, birth_date, thana,nid,trade_license_no,company_name,present_address,permanent_address,short_description,otp} = req.body;
     
     try{
         const {otp_pin} = jwt.verify(otpMap.get(phone_number),process.env.JWT_SECRET)
         if(otp_pin != otp){
-            res.render('output',{msg:'OTP mismatch'})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'OTP mismatch'})
             return;
         }
     }
     catch(e){
-        res.render('output',{msg:'OTP has timed out'})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'OTP has timed out'})
         return
     }
     
@@ -269,7 +289,7 @@ router.post('/sellersubmit', async(req, res) => {
         </html>`,
     }).catch(err =>{
         console.log(err)
-        res.render('output',{msg:`Email was wrong`})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:`Email was wrong`})
         return
     }); 
 
@@ -278,19 +298,23 @@ router.post('/sellersubmit', async(req, res) => {
     user_id = await client.query('INSERT INTO Users(name,email,phone_number,password,birth_date,updated_at,thana_id,type) VALUES ($1,$2,$3,$4,$5,NULL,get_thana_id($6),\'seller\') returning user_id', [name, email, phone_number, password, birth_date, thana]);
     await client.query('INSERT INTO Seller(present_address,permanent_address,nid,trade_license_no,company_name,short_description,user_id) VALUES ($1,$2,$3,$4,$5,$6,$7)',[present_address,permanent_address,nid,trade_license_no,company_name,short_description,user_id.rows[0].user_id]);
     client.release(true)
-    res.render('output',{msg:'Seller Registration successful'}) 
+    res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'Seller Registration successful'}) 
 })
 
 router.get('/verify/:token',async(req,res)=> {
+    if(req.session.phone_number){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are already logged in"})
+        return
+    }
     try{
         const{phone_number}= jwt.verify(req.params.token,process.env.JWT_SECRET);
         const client = await pool.connect();
         await client.query('UPDATE Users SET verified=true WHERE phone_number=$1',[phone_number]);
         client.release(true);
-        res.render('output',{msg:'Email verified successfully'})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'Email verified successfully'})
     }
     catch(e){
-        res.render('output',{msg:'Token is invalid'})
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:'Token is invalid'})
         return
     }
 })
