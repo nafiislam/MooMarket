@@ -29,10 +29,10 @@
               <a class="navbar-brand" href="/">
                   <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
               </a>
-              
+              <div style="margin-left: auto !important;">
               <% if(typeof locals.session === 'undefined'){%>
                 <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
-                <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: auto;"></i>Register</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
               <% }else{ %>
               
               <div class="btn-group">
@@ -50,6 +50,7 @@
                 </ul>
               </div>
               <% }%>
+            </div>
           </div>
       </nav>
           <!-- ....................................................END NAVBAR.......................................................... -->

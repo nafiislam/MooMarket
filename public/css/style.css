@@ -71,10 +71,6 @@ input[type="search"]::placeholder {
   color: #161515;
 }
 
-.search2 input[type="search"] {
-  border-top-left-radius: 0;
-}
-
 button[type="submit"] {
   text-indent: -999px;
   overflow: hidden;
