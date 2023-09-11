@@ -40,22 +40,25 @@
               <a href="/seller/giveAdvertisement" class="btn custom-btn-sidebar mb-5 rounded-pill w-100"><h5>Accepted Order Posts</h5></a>
           </div>
         </div>
-
-        <form class="col g-3" action="/seller/giveAdvertisement/type" method="post">
-            <div class="col-auto">
-                <label for="Type" class="form-label"><br><br>Select Type:</label>
-                <select id="type" name="type" class="form-select" aria-label=".form-select" required onchange="changeBackground(this)">              
-                    <option value="meat">Meat</option>
-                    <option value="cattle">Cattle</option>
-                    <option value="rawhide">Rawhide</option>
-                    <option value="horn">Horn</option>
-                    <option value="hoof">Hoof</option>
-                </select>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-5">Submit</button>
-            </div>
-        </form>
+        
+        <br><br>
+        <div class="col-md-2 container-main">
+          <form class="col g-3" action="/seller/giveAdvertisement/type" method="post">
+              <div class="col-auto">
+                  <label for="Type" class="form-label"><br><br>Select Type:</label>
+                  <select id="type" name="type" class="form-select" aria-label=".form-select" required onchange="changeBackground(this)">              
+                      <option value="meat">Meat</option>
+                      <option value="cattle">Cattle</option>
+                      <option value="rawhide">Rawhide</option>
+                      <option value="horn">Horn</option>
+                      <option value="hoof">Hoof</option>
+                  </select>
+              </div>
+              <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-5">Submit</button>
+              </div>
+          </form>
+        </div>
       </div> 
     </div>
   </div>
