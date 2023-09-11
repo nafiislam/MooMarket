@@ -154,7 +154,7 @@ router.get('/category/:category', async(req, res) => {
 })
 
 router.get('/search', async(req, res) => {
-  res.render('allmeat')
+  res.render('singleAdd', {type1:"1", type2:"5"})
 })
 
 module.exports = router;
