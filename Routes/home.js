@@ -250,6 +250,39 @@ router.post('/search/meatsubtype', async(req, res) => {
   }
 })
 
+router.post('/homeByCategory/query/:type', async(req, res) => {
+  if(req.query.type=="cattle"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+  else if(req.query.type=="meat"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+  else if(req.query.type=="horn"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+  else if(req.query.type=="hoof"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+  else if(req.query.type=="rawhide"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+  else if(req.query.type=="cattleBid"){
+    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
+    console.log(req.body);
+    console.log(priceHighLow)
+  }
+})
+
 router.get('/search', async(req, res) => {
   res.render('homeByCategory', {type:"1"})
 })
