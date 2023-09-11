@@ -20,16 +20,21 @@
 
     <!-- ....................................................NAVBAR.......................................................... -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-          <!-- Logo on the left -->
-          <a class="navbar-brand" href="#"><img src="/pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
-
-
-          <!-- Right Section: Login and Register Buttons -->
-          <div class="ml-auto">
-              <button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i>Dhaka</button>
-              <button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button>
-              <button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button>
+      <div class="container-fluid">
+          <!-- Logo (Brand) -->
+          <a class="navbar-brand" href="/">
+              <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+          </a>
+          
+          <div class="btn-group" style="margin-right: 50px;">
+              <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                Dashboard
+              </button>
+              <ul class="dropdown-menu" style="background-color: #000000;">
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                  <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                  <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+              </ul>
           </div>
       </div>
   </nav>

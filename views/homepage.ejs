@@ -24,36 +24,40 @@
     <% } %>
     <!-- ....................................................NAVBAR.......................................................... -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
+      <div class="container-fluid">
           <!-- Logo on the left -->
-          <a class="navbar-brand" href="/"><img src="/pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
+          <a class="navbar-brand" href="/">
+            <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+        </a>
 
           <!-- Middle Section: Search Bar -->
-          <div class="input-group mb-3">
-            <button id="searchID" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search options</button>
-            <ul class="dropdown-menu" style="width:20px;">
-              <li><a class="dropdown-item" onclick="optionHandler(1)">Farmname</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" onclick="optionHandler(2)">Seller name</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" onclick="optionHandler(3)">Meat subtype</a></li>
-            </ul>
-            <div class="search">
-              <form id="form" action="/search/sellername" method="POST">
-                <input id ="search" name ="search" type="search" placeholder="Search..." oninput="searchHandler()" required>
-                <button type="submit">Search</button>
-              </form>
-              <div class="results" style="color: #fff;">
+          <div>
+            <div class="input-group">
+              <button id="searchID" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search options</button>
+              <ul class="dropdown-menu" style="width:20px;">
+                <li><a class="dropdown-item" onclick="optionHandler(1)">Farmname</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" onclick="optionHandler(2)">Seller name</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" onclick="optionHandler(3)">Meat subtype</a></li>
+              </ul>
+              <div class="search search2">
+                <form id="form" action="/search/sellername" method="POST">
+                  <input id ="search" name ="search" type="search" placeholder="Search..." oninput="searchHandler()" required>
+                  <button type="submit">Search</button>
+                </form>
+                <div class="results" style="color: #fff;">
+                </div>
               </div>
             </div>
           </div>
           <!-- Right Section: Login and Register Buttons -->
-          <div class="ml-auto">
-            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i><%=locals.thana%></button></a>
+          <div class="">
+            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: auto;"></i></i><%=locals.thana%></button></a>
             
             <% if(typeof locals.session === 'undefined'){%>
-              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button></a>
-              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button></a>
+              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
             <% }else{ %>
             
             <div class="btn-group">

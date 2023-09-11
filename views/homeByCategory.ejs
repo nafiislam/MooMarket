@@ -19,97 +19,108 @@
     rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="alladd.css">
+    <link rel="stylesheet" href="/css/alladd.css">
   </head>
   <body>
         <!-- ....................................................NAVBAR.......................................................... -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <!-- Logo on the left -->
-                <a class="navbar-brand" href="#"><img src="LOGO.PNG" alt="Logo" width="150" height="60"></a>
-      
-                <!-- Middle Section: Search Bar -->
-                <form>
-                  <input type="search" placeholder="Search...">
-                  <button type="submit">Search</button>
-                </form>
-      
-                <!-- Right Section: Login and Register Buttons -->
-                <div class="ml-auto">
-                    <button class="login mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i>Dhaka</button>
-                    <button class="login1 mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button>
-                    <button class="login1 mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button>
-                </div>
+          <div class="container-fluid">
+              <!-- Logo (Brand) -->
+              <a class="navbar-brand" href="/">
+                  <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+              </a>
+              <div style="margin-left: auto !important;">
+              <% if(typeof locals.session === 'undefined'){%>
+                <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
+              <% }else{ %>
+              
+              <div class="btn-group">
+                <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                  Dashboard
+                </button>
+                <ul class="dropdown-menu" style="background-color: #000000;">
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                  <% if(locals.type=="seller"){ %>
+                    <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
+                  <% }else if(locals.type=="admin"){%>
+                    <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                  <% } %>
+                  <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+                </ul>
+              </div>
+              <% }%>
             </div>
-        </nav>
+          </div>
+      </nav>
           <!-- ....................................................END NAVBAR.......................................................... -->
 
           <div class="content-container">
-            <% if(locals.type="1") { %>
+            <% if(locals.advType=="cattle") { %>
                 <div class="navbarside">
                     <ul>
-                                    <a href=""><li class="activelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="activelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="passivelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="passivelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="passivelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="passivelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="passivelist"><i>All Auctions</i></li></a>
                     </ul>
-                <% } else if (locals.type="2") { %>
+                <% } else if (locals.advType=="meat") { %>
                     <div class="navbarside">
                         <ul>
-                                    <a href=""><li class="passivelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="activelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="passivelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="activelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="passivelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="passivelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="passivelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="passivelist"><i>All Auctions</i></li></a>
                         </ul>
-                  <% } else if (locals.type="3") { %>
+                  <% } else if (locals.advType=="horn") { %>
                     <div class="navbarside">
                         <ul>
-                                    <a href=""><li class="passivelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="activelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="passivelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="passivelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="activelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="passivelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="passivelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="passivelist"><i>All Auctions</i></li></a>
                         </ul>
-                    <% } else if (locals.type="4") { %>
+                    <% } else if (locals.advType=="hoof") { %>
                         <div class="navbarside">
                             <ul>
-                                    <a href=""><li class="passivelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="activelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="passivelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="passivelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="passivelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="activelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="passivelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="passivelist"><i>All Auctions</i></li></a>
                             </ul>
-                      <% } else if (locals.type="5") { %>
+                      <% } else if (locals.advType=="rawhide") { %>
                         <div class="navbarside">
                             <ul>
-                                    <a href=""><li class="passivelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="activelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="passivelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="passivelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="passivelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="passivelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="activelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="passivelist"><i>All Auctions</i></li></a>
                             </ul>
-                        <% } else if (locals.type="6") { %>
+                        <% } else if (locals.advType=="cattleBid") { %>
                             <div class="navbarside">
                                 <ul>
-                                    <a href=""><li class="passivelist"><i>All Cattles</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Meats</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Horns</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Hoofs</i></li></a>
-                                    <a href=""><li class="passivelist"><i>All Rawhides</i></li></a>
-                                    <a href=""><li class="activelist"><i>All Auctions</i></li></a>
+                                    <a href="/category/cattle"><li class="passivelist"><i>All Cattles</i></li></a>
+                                    <a href="/category/meat"><li class="passivelist"><i>All Meats</i></li></a>
+                                    <a href="/category/horn"><li class="passivelist"><i>All Horns</i></li></a>
+                                    <a href="/category/hoof"><li class="passivelist"><i>All Hoofs</i></li></a>
+                                    <a href="/category/rawhide"><li class="passivelist"><i>All Rawhides</i></li></a>
+                                    <a href="/category/cattleBid"><li class="activelist"><i>All Auctions</i></li></a>
                                 </ul>
                           <% } %>
             </div>
             <div class="content">
 
-                <% if(locals.type="1") { %>
+                <% if(locals.advType=="cattle") { %>
                     <div class="accordion accordion-flush">
                         <div class="accordion-item">
                           <h2 class="accordion-header" id="headingTwo">
@@ -190,7 +201,7 @@
                                   </div>
                                 </div>
                               </div>
-        `
+        
                               <div class="row mt-5">
                                 <div class="col-4 bar" style="text-align: center;">
                                   <h5><i>Search cattles by FARM names</i></h5>
@@ -237,7 +248,7 @@
                           </div>
                         </div>
                       </div>
-                    <% } else if (locals.type="2") { %>
+                    <% } else if (locals.advType=="meat") { %>
                         <div class="accordion accordion-flush">
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
@@ -379,7 +390,7 @@
                               </div>
                             </div>
                           </div>
-                      <% } else if (locals.type="3") { %>
+                      <% } else if (locals.advType=="horn") { %>
                         <div class="accordion accordion-flush">
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
@@ -475,7 +486,7 @@
                               </div>
                             </div>
                           </div>
-                        <% } else if (locals.type="4") { %>
+                        <% } else if (locals.advType=="hoof") { %>
                             <div class="accordion accordion-flush">
                                 <div class="accordion-item">
                                   <h2 class="accordion-header" id="headingTwo">
@@ -557,7 +568,7 @@
                                   </div>
                                 </div>
                               </div>
-                          <% } else if (locals.type="5") { %>
+                          <% } else if (locals.advType=="rawhide") { %>
                             <div class="accordion accordion-flush">
                                 <div class="accordion-item">
                                   <h2 class="accordion-header" id="headingTwo">
@@ -639,7 +650,7 @@
                                   </div>
                                 </div>
                               </div>
-                            <% } else if (locals.type="6") { %>
+                            <% } else if (locals.advType=="cattleBid") { %>
                                 <div class="accordion accordion-flush">
                                     <div class="accordion-item">
                                       <h2 class="accordion-header" id="headingTwo">
@@ -773,114 +784,154 @@
 
                 <!-- Your webpage content goes here -->
                 <div class="alladd">
-                    <% if(locals.type="1") { %>
+                    <% if(locals.advType=="cattle") { %>
                         <h1>Welcome to All Cattle Page</h1>
-                        <% } else if (locals.type="2") { %>
+                        <% } else if (locals.advType=="meat") { %>
                             <h1>Welcome to All Meat Page</h1>
-                          <% } else if (locals.type="3") { %>
+                          <% } else if (locals.advType=="horn") { %>
                             <h1>Welcome to All Horn Page</h1>
-                            <% } else if (locals.type="4") { %>
+                            <% } else if (locals.advType=="hoof") { %>
                                 <h1>Welcome to All Hoof Page</h1>
-                              <% } else if (locals.type="5") { %>
+                              <% } else if (locals.advType=="rawhide") { %>
                                 <h1>Welcome to All Rawhide Page</h1>
-                                <% } else if (locals.type="6") { %>
+                                <% } else if (locals.advType=="cattleBid") { %>
                                     <h1>Welcome to All Auction Page</h1>
                                   <% } %>
 
                   <div id="all" class="card-wrap" data-aos="fade-up">
               
                     <div class="card-container d-flex flex-row flex-wrap">
-                        <% if(locals.type="1") { %>
-                            <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
-                                    </div>
-                                  </a>
+                        <% if(locals.advType=="cattle") { %>
+                            <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                              <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                <div class="card">
+                                  <img src="<%=locals.allAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+                                  <div class="card-body">
+                                    <h5 class="card-title">Fixed price: <%=locals.allAdvertisements[i].price%> BDT</h5>
+                                    <p>Farm name: <%=locals.allAdvertisements[i].farm_name%><br>
+                                    Quantity: <%=locals.allAdvertisements[i].quantity%>
+                                    <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                      <span style="color:green"><br>Status: Available</span>
+                                    <%}else{%>
+                                      <span style="color:red"><br>Status: Not available</span>
+                                    <% } %>
+                                  </p>
+                                  </div>
+                                  <div class="card-footer">
+                                    <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
+                                  </div>
+                                </div>
+                              </a>
                                 <%} %>
-                            <% } else if (locals.type="2") { %>
-                                <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
+                            <% } else if (locals.advType=="meat") { %>
+                              <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                                <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                  <div class="card">
+                                    <img src="<%=locals.allAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit; width: 325px; height: 200px;">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Selling price per kg: <%=locals.allAdvertisements[i].price_per_kg%> BDT</h5>
+                                      <p>Type: <%=locals.allAdvertisements[i].type%>
+                                        <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                          <span style="color:green"><br>Status: Available</span>
+                                          <br>Quantity available: <%=locals.allAdvertisements[i].quantity%>
+                                        <%}else{%>
+                                          <span style="color:red"><br>Status: Not available</span>
+                                        <% } %>
+                                      </p>
                                     </div>
-                                  </a>
-                                <%} %>
-                              <% } else if (locals.type="3") { %>
-                                <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
+                                    <div class="card-footer">
+                                      <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
                                     </div>
-                                  </a>
+                                  </div>
+                                </a>    
                                 <%} %>
-                                <% } else if (locals.type="4") { %>
-                                    <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
-                                    </div>
-                                  </a>
-                                <%} %>
-                                  <% } else if (locals.type="5") { %>
-                                    <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
-                                    </div>
-                                  </a>
-                                <%} %>
-                                    <% } else if (locals.type="6") { %>
-                                        <% for(int i = 0; i<15; i++) %>
-                                <a href="#" class="cardLink" style="text-decoration: none">
-                                    <div class="card">
-                                      <img src="hotcow1.jpg" class="card-img-top" alt="..." style="border-radius: inherit;">
-                                      <div class="card-body">
-                                        <h5 class="card-title">1,00,000 BDT</h5>
-                                        <p class="card-text">Age: 10 years<br>Weight: 200kg</p>
-                                      </div>
-                                      <div class="card-footer">
-                                        <small class="text-muted">Advertised 10 hours ago</small>
-                                      </div>
-                                    </div>
-                                  </a>
-                                <%} %>
+                              <% } else if (locals.advType=="horn") { %>
+                              <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                                <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                  <div class="card">
+                                    <img src="<%=locals.allAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Selling price per piece: <%=locals.allAdvertisements[i].selling_price_per_piece%> BDT</h5>
+                                      Storage date: <%=locals.allAdvertisements[i].date_of_storage%>
+                                      <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                        <span style="color:green"><br>Status: Available</span>
+                                        <br>Quantity available: <%=locals.allAdvertisements[i].quantity%>
+                                      <%}else{%>
+                                        <span style="color:red"><br>Status: Not available</span>
                                       <% } %>
+                                    </div>
+                                    <div class="card-footer">
+                                      <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
+                                    </div>
+                                  </div>
+                                </a>
+                                <%} %>
+                                <% } else if (locals.advType=="hoof") { %>
+                              <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                                <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                  <div class="card">
+                                    <img src="<%=locals.allAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit; width: 325px; height: 200px;">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Selling price per piece: <%=locals.allAdvertisements[i].selling_price_per_piece%> BDT</h5>
+                                      Storage date: <%=locals.allAdvertisements[i].date_of_storage%>
+                                      <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                        <span style="color:green"><br>Status: Available</span>
+                                        <br>Quantity available: <%=locals.allAdvertisements[i].quantity%>
+                                      <%}else{%>
+                                        <span style="color:red"><br>Status: Not available</span>
+                                      <% } %>
+                                    </div>
+                                    <div class="card-footer">
+                                      <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
+                                    </div>
+                                  </div>
+                                </a>
+                                <%} %>
+                                  <% } else if (locals.advType=="rawhide") { %>
+                              <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                                <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                  <div class="card">
+                                    <img src="<%=locals.allAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Selling price per piece: <%=locals.allAdvertisements[i].selling_price_per_piece%> BDT</h5>
+                                      <p>Preservation style: <%=locals.allAdvertisements[i].preservation_style%>
+                                        <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                          <span style="color:green"><br>Status: Available</span>
+                                          <br>Quantity available: <%=locals.allAdvertisements[i].quantity%>
+                                        <%}else{%>
+                                          <span style="color:red"><br>Status: Not available</span>
+                                        <% } %>
+                                      </p>
+                                    </div>
+                                    <div class="card-footer">
+                                      <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
+                                    </div>
+                                  </div>
+                                </a> 
+                                <%} %>
+                                    <% } else if (locals.advType=="cattleBid") { %>
+                              <% for(let i = 0; i<locals.allAdvertisements.length; i++){ %>
+                                <a href="/singleAdvertisement/buyer/<%= locals.allAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+                                  <div class="card">
+                                    <img src="<%=locals.allAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Minimum bid price: <%=locals.allAdvertisements[i].price%> BDT</h5>
+                                      <p>Farm name: <%=locals.allAdvertisements[i].farm_name%></p>
+                                      <p>Quantity: <%=locals.allAdvertisements[i].quantity%>
+                                        <% if(locals.allAdvertisements[i].status=="unfinished"){ %>
+                                          <span style="color:green"><br>Status: Available</span>
+                                        <%}else{%>
+                                          <span style="color:red"><br>Status: Not available</span>
+                                        <% } %>
+                                      </p>
+                                    </div>
+                                    <div class="card-footer">
+                                      <small class="text-muted">Advertised at: <%=locals.allAdvertisements[i].created_at%></small>
+                                    </div>
+                                  </div>
+                                </a>
+                                <%} %>
+                          <% } %>
                                         
                     </div>
                   </div>                    
@@ -888,7 +939,7 @@
                 </div>
               </div>
           </div>
-
+</div>
 
               <!-- ....................................................FOOTER.......................................................... -->
     <div class="footer">
