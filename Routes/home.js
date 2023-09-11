@@ -201,10 +201,10 @@ router.post('/search/sellername', async(req, res) => {
           hoofAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hoofAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
           hoofAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hoofAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
       }
-      res.render('homepage',{session:req.session.phone_number,thana:thana,type:req.session.type,meatAdvertisements:meatAdvertisements.rows,cattleAdvertisements:cattleAdvertisements.rows,rawhideAdvertisements:rawhideAdvertisements.rows,hornAdvertisements:hornAdvertisements.rows,hoofAdvertisements:hoofAdvertisements.rows,bestMeat:bestMeat,bestCattle:bestCattle}) 
+      res.render('homepage',{session:req.session.phone_number,thana:thana,type:req.session.type,meatAdvertisements:meatAdvertisements.rows,cattleAdvertisements:cattleAdvertisements.rows,rawhideAdvertisements:rawhideAdvertisements.rows,hornAdvertisements:hornAdvertisements.rows,hoofAdvertisements:hoofAdvertisements.rows,bestMeat:bestMeat,bestCattle:bestCattle,msg:"Showing search results"}) 
     }
     else{
-      res.render('homepage',{session:req.session.phone_number,thana:thana,type:req.session.type,meatAdvertisements:[],cattleAdvertisements:[],rawhideAdvertisements:[],hornAdvertisements:[],hoofAdvertisements:[],bestMeat:undefined,bestCattle:undefined})
+      res.render('homepage',{session:req.session.phone_number,thana:thana,type:req.session.type,meatAdvertisements:[],cattleAdvertisements:[],rawhideAdvertisements:[],hornAdvertisements:[],hoofAdvertisements:[],bestMeat:undefined,bestCattle:undefined,msg:"Nothing found during search"})
     }
   }
   else{

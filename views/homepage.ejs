@@ -16,7 +16,12 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-   
+    <% if(locals.msg){ %>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong><%=locals.msg%></strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
     <!-- ....................................................NAVBAR.......................................................... -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
