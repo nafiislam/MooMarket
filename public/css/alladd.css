@@ -546,15 +546,15 @@ input[type="search"]:focus {
   }
   
   .card {
-    min-width: 300px; /* Adjust the card width as needed */
+    min-width: 250px; /* Adjust the card width as needed */
   height: 420px; /* Adjust the card height as needed */
   background-color: #f4fc65; /* Card background color */
   color: rgb(67, 11, 11); /* Text color */
   text-align: center; /* Center-align card content */
-  margin-right: 50px; /* Optional margin for spacing between cards */
-  margin-left: 50px;
-  margin-top: 50px;
-  border-radius: 0 40px 15px 40px;
+  margin-right: 10px; /* Optional margin for spacing between cards */
+  margin-left: 10px;
+  margin-top: 20px;
+  border-radius: 0 30px 15px 30px;
   }
   
   .card:hover {

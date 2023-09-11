@@ -24,9 +24,11 @@
     <% } %>
     <!-- ....................................................NAVBAR.......................................................... -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
+      <div class="container-fluid">
           <!-- Logo on the left -->
-          <a class="navbar-brand" href="/"><img src="/pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
+          <a class="navbar-brand" href="/">
+            <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+        </a>
 
           <!-- Middle Section: Search Bar -->
           <div>
@@ -51,11 +53,11 @@
           </div>
           <!-- Right Section: Login and Register Buttons -->
           <div class="">
-            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i><%=locals.thana%></button></a>
+            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: auto;"></i></i><%=locals.thana%></button></a>
             
             <% if(typeof locals.session === 'undefined'){%>
-              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: 7px;"></i>Login</button></a>
-              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: 7px;"></i>Register</button></a>
+              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
             <% }else{ %>
             
             <div class="btn-group">

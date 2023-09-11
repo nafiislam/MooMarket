@@ -30,20 +30,26 @@
                   <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
               </a>
               
+              <% if(typeof locals.session === 'undefined'){%>
+                <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+                <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: auto;"></i>Register</button></a>
+              <% }else{ %>
+              
               <div class="btn-group">
-                  <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
-                    Dashboard
-                  </button>
-                  <ul class="dropdown-menu" style="background-color: #000000;">
-                    <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
-                    <% if(locals.type=="seller"){ %>
-                      <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
-                    <% }else if(locals.type=="admin"){%>
-                      <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
-                    <% } %>
-                    <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
-                  </ul>
-                </div>
+                <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                  Dashboard
+                </button>
+                <ul class="dropdown-menu" style="background-color: #000000;">
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                  <% if(locals.type=="seller"){ %>
+                    <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
+                  <% }else if(locals.type=="admin"){%>
+                    <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                  <% } %>
+                  <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+                </ul>
+              </div>
+              <% }%>
           </div>
       </nav>
           <!-- ....................................................END NAVBAR.......................................................... -->
