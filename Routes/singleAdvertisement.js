@@ -4,26 +4,37 @@ const router = express.Router();
 const { pool } = require("../db");
 
 router.get('/buyer/:id', async(req, res) => {
-    var advertisement;
+    var advertisement,cattle;
     const client = await pool.connect();
     const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
     if(type.rows[0].type=="meat"){
-        advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
     }
     else if(type.rows[0].type=="cattle"){
-        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN (cattle_advertisement JOIN cattle ON advertise_id=cattle_advertise_id) WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN cattle_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
+        cattle = await client.query("SELECT * FROM cattle WHERE cattle_advertise_id=$1", [req.params.id]);
     }
     else if(type.rows[0].type=="rawhide"){
-        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
     }
     else if(type.rows[0].type=="horn"){
-        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN horn_advertisement WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN horn_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
     }
     else if(type.rows[0].type=="hoof"){
-        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertise_id=$1", [req.params.id]);
+        advertisement = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
     }
     client.release(true);
-    res.render('singleAdvertisementBuyer',{session:req.session.phone_number,advertisement:advertisement.rows[0]})
+    //console.log(advertisement.rows);
+    if(advertisement.rows.length==0){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
+        return;
+    }
+    if( type.rows[0].type=="cattle" ){
+        res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type,cattle:cattle.rows})
+    }
+    else{
+        res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type})
+    }
 })
 
 router.get('/seller/:id', async(req, res) => {
@@ -123,6 +134,11 @@ router.get('/admin/:id', async(req, res) => {
             }
             client.release(true);
             //console.log(advertisement.rows);
+
+            if(advertisement.rows.length==0){
+                res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
+                return;
+            }
 
             if( type.rows[0].type=="cattle" ){
                 //console.log(cattle.rows);

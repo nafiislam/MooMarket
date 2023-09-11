@@ -97,7 +97,9 @@ router.get('/category/:category', async(req, res) => {
         for(var i=0;i<meatAdvertisements.rows.length;i++){
           meatAdvertisements.rows[i].created_at=formatDate(JSON.stringify(meatAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows}) 
+        console.log(meatAdvertisements.rows);
+        console.log(req.params.category);
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows,advType:req.params.category}) 
     }
     else if(req.params.category=="cattle"){
         const client = await pool.connect();
@@ -106,7 +108,7 @@ router.get('/category/:category', async(req, res) => {
         for(var i=0;i<cattleAdvertisements.rows.length;i++){
           cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows}) 
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows,advType:req.params.category}) 
     }
     else if(req.params.category=="cattleBid"){
         const client = await pool.connect();
@@ -115,7 +117,7 @@ router.get('/category/:category', async(req, res) => {
         for(var i=0;i<cattleAdvertisements.rows.length;i++){
           cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows}) 
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows,advType:req.params.category}) 
     }
     else if(req.params.category=="rawhide"){
         const client = await pool.connect();
@@ -125,7 +127,7 @@ router.get('/category/:category', async(req, res) => {
           rawhideAdvertisements.rows[i].created_at=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
           rawhideAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:rawhideAdvertisements.rows}) 
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:rawhideAdvertisements.rows,advType:req.params.category}) 
     }
     else if(req.params.category=="horn"){
         const client = await pool.connect();
@@ -135,7 +137,7 @@ router.get('/category/:category', async(req, res) => {
           hornAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hornAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
           hornAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hornAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hornAdvertisements.rows}) 
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hornAdvertisements.rows,advType:req.params.category}) 
     }
     else if(req.params.category=="hoof"){
         const client = await pool.connect();
@@ -145,7 +147,7 @@ router.get('/category/:category', async(req, res) => {
           hoofAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hoofAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
           hoofAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hoofAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
         }
-        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows}) 
+        res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows,advType:req.params.category}) 
     }
   }
   else{
@@ -249,7 +251,7 @@ router.post('/search/meatsubtype', async(req, res) => {
 })
 
 router.get('/search', async(req, res) => {
-  res.render('singleAdd', {type1:"1", type2:"5"})
+  res.render('homeByCategory', {type:"1"})
 })
 
 module.exports = router;
