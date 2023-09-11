@@ -224,7 +224,7 @@ input[type="search"] {
   background: transparent;
   margin: 0;
   padding: 8px 8px 8px 30px;
-  width: 500px;
+  width: 300px;
   font-size: 14px;
   color: inherit;
   /* border: 1px solid transparent; */
@@ -579,7 +579,7 @@ input[type="search"]::placeholder {
     background: transparent;
     margin: 0;
     padding: 8px 8px 8px 25px;
-    width: 500px;
+    width: 300px;
     font-size: 14px;
     color: inherit;
     /* color:#b6e286; */
@@ -601,6 +601,43 @@ input[type="search"]::placeholder {
     z-index: 99 !important;
   }
   .results ul li:hover{
+    background-color: gray;
+  }
+  
+
+  .results2{
+    position: relative;
+  }
+  
+  .results2 ul{
+    position: absolute;
+    border-top: 1px solid #999;
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 8px 8px 8px 25px;
+    width: 300px;
+    font-size: 14px;
+    color: inherit;
+    /* color:#b6e286; */
+    background-color: #e7f0dd;
+    list-style: none;
+    z-index: 3  !important;
+  }
+  
+  .results2 ul li{
+  
+    background: transparent;
+    background-color: #e7f0dd;
+    list-style: none !important;
+    cursor: pointer;
+    margin: 0;
+    border: 1px;
+    color: black;
+    padding: 8px 8px 8px 0px;
+    z-index: 99 !important;
+  }
+  .results2 ul li:hover{
     background-color: gray;
   }
   

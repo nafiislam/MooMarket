@@ -25,7 +25,8 @@ const searchHandler = ()=>{
     if(input!=""){
         var suggestions = arr.filter((data)=>{
             return data.toLowerCase().startsWith(input.toLowerCase());
-        })
+        }).slice(0, 5);
+        
         if(suggestions.length!=0){
             var html = suggestions.map((data)=>{
                 return `<li onclick="clickHandler(this)">${data}</li>`

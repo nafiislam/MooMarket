@@ -30,10 +30,10 @@ router.get('/buyer/:id', async(req, res) => {
         return;
     }
     if( type.rows[0].type=="cattle" ){
-        res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type,cattle:cattle.rows})
+        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type,cattle:cattle.rows})
     }
     else{
-        res.render('singleAdvertisementAdmin',{session:req.session.phone_number,advertisement:advertisement.rows[0],type:type.rows[0].type})
+        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type})
     }
 })
 

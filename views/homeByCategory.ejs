@@ -134,6 +134,12 @@
                               
                               <div class="row">
                                 <div class="col-4">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price" id="price">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
                                   <div class="wrapper">
                                     <header><h6><i>Price(BDT)</i></h6></header>
                                     <div class="price-input1">
@@ -157,90 +163,78 @@
                                   </div>
                                 </div>
                                 <div class="col-4">
+                                  
                                   <div class="wrapper">
-                                    <header><h6><i>Weight (kg)</i></h6></header>
-                                    <div class="price-input2">
-                                      <div class="field2">
-                                        <span><i>Min</i></span>
-                                        <input type="number" class="input-min2" name="minWeight" value="125">
-                                      </div>
-                                      <div class="separator2">-</div>
-                                      <div class="field2">
-                                        <span><i>Max</i></span>
-                                        <input type="number" class="input-max2" name="maxWeight" value="375">
-                                      </div>
-                                    </div>
-                                    <div class="slider2">
-                                      <div class="progress2"></div>
-                                    </div>
-                                    <div class="range-input2">
-                                      <input type="range" class="range-min2" min="0" max="500" value="125" step="5">
-                                      <input type="range" class="range-max2" min="0" max="500" value="375" step="5">
-                                    </div>
                                   </div>
                                 </div> 
-                                 <div class="col-4">
+                                <div class="col-4">
+                                  
                                   <div class="wrapper">
-                                    <header><h6><i>Age (Year)</i></h6></header>
-                                    <div class="price-input3">
-                                      <div class="field3">
-                                        <span><i>Min</i></span>
-                                        <input type="number" class="input-min3" value="5" name="minAge">
-                                      </div>
-                                      <div class="separator3">-</div>
-                                      <div class="field3">
-                                        <span><i>Max</i></span>
-                                        <input type="number" class="input-max3" value="15" name="maxAge">
-                                      </div>
-                                    </div>
-                                    <div class="slider3">
-                                      <div class="progress3"></div>
-                                    </div>
-                                    <div class="range-input3">
-                                      <input type="range" class="range-min3" min="0" max="20" value="5" step="1">
-                                      <input type="range" class="range-max3" min="0" max="20" value="15" step="1">
-                                    </div>
                                   </div>
                                 </div>
                               </div>
         
                               <div class="row mt-5">
                                 <div class="col-4 bar">
-                                  <input id ="search" style="border: 1px solid" name ="search" type="search" placeholder="Search..." oninput="searchHandler()" required>
+                                  <header><h6><i>Farms</i></h6></header>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="farmname" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
+                                  <input id ="search" style="border: 1px solid" name ="search" type="search" placeholder="Search..." oninput="searchHandler()">
                                   <div class="results" style="color: #fff;">
                                   </div>
                                 </div>
                         
-                                <div class="col-4"></div>
+                                <div class="col-4 bar">
+                                  <header><h6><i>Seller name</i></h6></header>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
+                                  <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                  <div class="results2" style="color: #fff;">
+                                  </div>
+                                </div>
         
                                 <div class="col-4">
                                   <h6>Sort by -</h6>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="normal" id="flexRadioDefault1" checked>
+                                    <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       <span>Default</span>
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="priceHighLow" id="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       <span>Price [High -> Low]</span>
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="priceLowHigh" id="flexRadioDefault3">
+                                    <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       <span>Price [Low -> High]</span>
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="mostRecent" id="flexRadioDefault3">
+                                    <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Default</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       <span>Most recent</span>
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="leastRecent" id="flexRadioDefault3">
+                                    <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                       <span>Least recent</span>
                                     </label>
@@ -257,149 +251,256 @@
                         </div>
                       </div>
                     <% } else if (locals.advType=="meat") { %>
-                        <div class="accordion accordion-flush">
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                  <i>SORT OR FILTER ITEMS...</i>
-                                </button>
-                              </h2>
-                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                  <div class="row">
-                                    <div class="col-4">
-                                      <div class="wrapper">
-                                        <header><h6><i>Price(BDT)</i></h6></header>
-                                        <div class="price-input1">
-                                          <div class="field1">
-                                            <span><i>Min</i></span>
-                                            <input type="number" class="input-min1" value="10000">
-                                          </div>
-                                          <div class="separator1">-</div>
-                                          <div class="field1">
-                                            <span><i>Max</i></span>
-                                            <input type="number" class="input-max1" value="30000">
-                                          </div>
-                                        </div>
-                                        <div class="slider1">
-                                          <div class="progress1"></div>
-                                        </div>
-                                        <div class="range-input1">
-                                          <input type="range" class="range-min1" min="0" max="40000" value="10000" step="100">
-                                          <input type="range" class="range-max1" min="0" max="40000" value="30000" step="100">
-                                        </div>
+                      <div class="accordion accordion-flush">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              <i>SORT OR FILTER ITEMS...</i>
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <form action="/homeByCategory/query/meat" method="post">
+                            <div class="accordion-body">
+                              
+                              <div class="row">
+                                <div class="col-4">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="price" id="price">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
+                                  <div class="wrapper">
+                                    <header><h6><i>Price per kg(BDT)</i></h6></header>
+                                    <div class="price-input1">
+                                      <div class="field1">
+                                        <span><i>Min</i></span>
+                                        <input type="number" class="input-min1" name="minPrice" value="125000">
+                                      </div>
+                                      <div class="separator1">-</div>
+                                      <div class="field1">
+                                        <span><i>Max</i></span>
+                                        <input type="number" class="input-max1" name="maxPrice" value="375000">
                                       </div>
                                     </div>
-                                    <div class="col-4">
-                                      <div class="wrapper">
-                                        <header><h6><i>Weight (kg)</i></h6></header>
-                                        <div class="price-input2">
-                                          <div class="field2">
-                                            <span><i>Min</i></span>
-                                            <input type="number" class="input-min2" value="25">
-                                          </div>
-                                          <div class="separator2">-</div>
-                                          <div class="field2">
-                                            <span><i>Max</i></span>
-                                            <input type="number" class="input-max2" value="75">
-                                          </div>
-                                        </div>
-                                        <div class="slider2">
-                                          <div class="progress2"></div>
-                                        </div>
-                                        <div class="range-input2">
-                                          <input type="range" class="range-min2" min="0" max="100" value="25" step="0.5">
-                                          <input type="range" class="range-max2" min="0" max="100" value="75" step="0.5">
-                                        </div>
-                                      </div>
-                                    </div> 
-                                     <div class="col-4">
-                                      <div class="wrapper">
-                                        <header><h6><i>Last Arrival (days)</i></h6></header>
-                                        <div class="price-input3">
-                                          <div class="field3">
-                                            <span><i>Min</i></span>
-                                            <input type="number" class="input-min3" value="25">
-                                          </div>
-                                          <div class="separator3">-</div>
-                                          <div class="field3">
-                                            <span><i>Max</i></span>
-                                            <input type="number" class="input-max3" value="75">
-                                          </div>
-                                        </div>
-                                        <div class="slider3">
-                                          <div class="progress3"></div>
-                                        </div>
-                                        <div class="range-input3">
-                                          <input type="range" class="range-min3" min="0" max="100" value="25" step="1">
-                                          <input type="range" class="range-max3" min="0" max="100" value="75" step="1">
-                                        </div>
-                                      </div>
+                                    <div class="slider1">
+                                      <div class="progress1"></div>
+                                    </div>
+                                    <div class="range-input1">
+                                      <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
+                                      <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
                                     </div>
                                   </div>
-            
-                                  <div class="row mt-5">
-                                    <div class="col-4 bar" style="text-align: center;">
-                                      <h5><i>Search Meat by FARM names</i></h5>
-                                      <select id="farmList" class="selectpicker" multiple>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                        <option value="4">Four</option>
-                                        <option value="5">five</option>
-                                        <option value="6">six</option>
-                                        <option value="7">seven</option>
-                                        <option value="8">eight</option>
-                                        <option value="9">nine</option>
-                                        <option value="10">ten</option>
-                                      </select>
-                                    </div>
-            
-                                    <div class="col-4 bar" style="text-align: center;">
-                                        <h5><i>Search Meat by Body Parts</i></h5>
-                                        <select id="partList" class="selectpicker" multiple>
-                                          <option value="1">One</option>
-                                          <option value="2">Two</option>
-                                          <option value="3">Three</option>
-                                          <option value="4">Four</option>
-                                          <option value="5">five</option>
-                                          <option value="6">six</option>
-                                          <option value="7">seven</option>
-                                          <option value="8">eight</option>
-                                          <option value="9">nine</option>
-                                          <option value="10">ten</option>
-                                        </select>
-                                      </div>
-            
-                                    <div class="col-4">
-                                      <h6>Sort by -</h6>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                          <span>Default</span>
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                          <span>Price [High -> Low]</span>
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                          <span>Price [Low -> High]</span>
-                                        </label>
-                                      </div>
-                                    </div>
-            
+                                </div>
+                                <div class="col-4">
+                                  
+                                  <div class="wrapper">
+                                  </div>
+                                </div> 
+                                <div class="col-4">
+                                  
+                                  <div class="wrapper">
                                   </div>
                                 </div>
                               </div>
+        
+                              <div class="row mt-5">
+                                <div class="col-4 bar">
+                                  <header><h6><i>Subtype</i></h6></header>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="subtype" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
+                                  <input id ="search" style="border: 1px solid" name ="search" type="search" placeholder="Search..." oninput="searchHandler()">
+                                  <div class="results" style="color: #fff;">
+                                  </div>
+                                </div>
+                        
+                                <div class="col-4 bar">
+                                  <header><h6><i>Seller name</i></h6></header>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Use?</span>
+                                    </label>
+                                  </div>
+                                  <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                  <div class="results2" style="color: #fff;">
+                                  </div>
+                                </div>
+        
+                                <div class="col-4">
+                                  <h6>Sort by -</h6>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Default</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Price [High -> Low]</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Price [Low -> High]</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Default</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Most recent</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      <span>Least recent</span>
+                                    </label>
+                                  </div>
+                                </div>
+        
+                              </div>
+                              <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">Apply</button>
+                              </div>
                             </div>
+                          </form>
                           </div>
+                        </div>
+                      </div>
                       <% } else if (locals.advType=="horn") { %>
                         <div class="accordion accordion-flush">
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                              <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i>SORT OR FILTER ITEMS...</i>
+                              </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                              <form action="/homeByCategory/query/horn" method="post">
+                              <div class="accordion-body">
+                                
+                                <div class="row">
+                                  <div class="col-4">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="price" id="price">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Use?</span>
+                                      </label>
+                                    </div>
+                                    <div class="wrapper">
+                                      <header><h6><i>Price per piece(BDT)</i></h6></header>
+                                      <div class="price-input1">
+                                        <div class="field1">
+                                          <span><i>Min</i></span>
+                                          <input type="number" class="input-min1" name="minPrice" value="125000">
+                                        </div>
+                                        <div class="separator1">-</div>
+                                        <div class="field1">
+                                          <span><i>Max</i></span>
+                                          <input type="number" class="input-max1" name="maxPrice" value="375000">
+                                        </div>
+                                      </div>
+                                      <div class="slider1">
+                                        <div class="progress1"></div>
+                                      </div>
+                                      <div class="range-input1">
+                                        <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
+                                        <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-4">
+                                    
+                                    <div class="wrapper">
+                                    </div>
+                                  </div> 
+                                  <div class="col-4">
+                                    
+                                    <div class="wrapper">
+                                    </div>
+                                  </div>
+                                </div>
+          
+                                <div class="row mt-5">
+                                  
+                          
+                                  <div class="col-4 bar">
+                                    <header><h6><i>Seller name</i></h6></header>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Use?</span>
+                                      </label>
+                                    </div>
+                                    <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                    <div class="results2" style="color: #fff;">
+                                    </div>
+                                  </div>
+          
+                                  <div class="col-4">
+                                    <h6>Sort by -</h6>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Default</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Price [High -> Low]</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Price [Low -> High]</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Default</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Most recent</span>
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
+                                      <label class="form-check-label" for="flexRadioDefault1">
+                                        <span>Least recent</span>
+                                      </label>
+                                    </div>
+                                  </div>
+          
+                                </div>
+                                <div class="col-auto">
+                                  <button type="submit" class="btn btn-primary mb-3">Apply</button>
+                                </div>
+                              </div>
+                            </form>
+                            </div>
+                          </div>
+                        </div>
+                        <% } else if (locals.advType=="hoof") { %>
+                          <div class="accordion accordion-flush">
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -407,385 +508,235 @@
                                 </button>
                               </h2>
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <form action="/homeByCategory/query/hoof" method="post">
                                 <div class="accordion-body">
+                                  
                                   <div class="row">
                                     <div class="col-4">
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="price" id="price">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          <span>Use?</span>
+                                        </label>
+                                      </div>
                                       <div class="wrapper">
-                                        <header><h6><i>Price(BDT)</i></h6></header>
+                                        <header><h6><i>Price per piece(BDT)</i></h6></header>
                                         <div class="price-input1">
                                           <div class="field1">
                                             <span><i>Min</i></span>
-                                            <input type="number" class="input-min1" value="2500">
+                                            <input type="number" class="input-min1" name="minPrice" value="125000">
                                           </div>
                                           <div class="separator1">-</div>
                                           <div class="field1">
                                             <span><i>Max</i></span>
-                                            <input type="number" class="input-max1" value="75000">
+                                            <input type="number" class="input-max1" name="maxPrice" value="375000">
                                           </div>
                                         </div>
                                         <div class="slider1">
                                           <div class="progress1"></div>
                                         </div>
                                         <div class="range-input1">
-                                          <input type="range" class="range-min1" min="0" max="100000" value="2500" step="500">
-                                          <input type="range" class="range-max1" min="0" max="100000" value="75000" step="500">
+                                          <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
+                                          <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
                                         </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-4">
+                                      
+                                      <div class="wrapper">
+                                      </div>
+                                    </div> 
+                                    <div class="col-4">
+                                      
+                                      <div class="wrapper">
                                       </div>
                                     </div>
                                   </div>
             
                                   <div class="row mt-5">
-                                    <div class="col-4 bar" style="text-align: center;">
-                                      <h5><i>Search hoofs by FARM names</i></h5>
-                                      <select id="farmList" class="selectpicker" multiple>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                        <option value="4">Four</option>
-                                        <option value="5">five</option>
-                                        <option value="6">six</option>
-                                        <option value="7">seven</option>
-                                        <option value="8">eight</option>
-                                        <option value="9">nine</option>
-                                        <option value="10">ten</option>
-                                      </select>
-                                    </div>
-            
-                                    <div class="col-4 bar" style="text-align: center;">
-                                        <h5><i>Search hoofs by Preferred Color</i></h5>
-                                        <select id="colorList" class="selectpicker" multiple>
-                                          <option value="1">One</option>
-                                          <option value="2">Two</option>
-                                          <option value="3">Three</option>
-                                          <option value="4">Four</option>
-                                          <option value="5">five</option>
-                                          <option value="6">six</option>
-                                          <option value="7">seven</option>
-                                          <option value="8">eight</option>
-                                          <option value="9">nine</option>
-                                          <option value="10">ten</option>
-                                        </select>
+                                    
+                            
+                                    <div class="col-4 bar">
+                                      <header><h6><i>Seller name</i></h6></header>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          <span>Use?</span>
+                                        </label>
                                       </div>
+                                      <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                      <div class="results2" style="color: #fff;">
+                                      </div>
+                                    </div>
             
                                     <div class="col-4">
                                       <h6>Sort by -</h6>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                        <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                           <span>Default</span>
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                           <span>Price [High -> Low]</span>
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                        <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                           <span>Price [Low -> High]</span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          <span>Default</span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          <span>Most recent</span>
+                                        </label>
+                                      </div>
+                                      <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                          <span>Least recent</span>
                                         </label>
                                       </div>
                                     </div>
             
                                   </div>
+                                  <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">Apply</button>
+                                  </div>
                                 </div>
+                              </form>
                               </div>
                             </div>
                           </div>
-                        <% } else if (locals.advType=="hoof") { %>
-                            <div class="accordion accordion-flush">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      <i>SORT OR FILTER ITEMS...</i>
-                                    </button>
-                                  </h2>
-                                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      <div class="row">
-                                        <div class="col-4">
-                                          <div class="wrapper">
-                                            <header><h6><i>Price(BDT)</i></h6></header>
-                                            <div class="price-input1">
-                                              <div class="field1">
-                                                <span><i>Min</i></span>
-                                                <input type="number" class="input-min1" value="2500">
-                                              </div>
-                                              <div class="separator1">-</div>
-                                              <div class="field1">
-                                                <span><i>Max</i></span>
-                                                <input type="number" class="input-max1" value="75000">
-                                              </div>
-                                            </div>
-                                            <div class="slider1">
-                                              <div class="progress1"></div>
-                                            </div>
-                                            <div class="range-input1">
-                                              <input type="range" class="range-min1" min="0" max="100000" value="2500" step="500">
-                                              <input type="range" class="range-max1" min="0" max="100000" value="75000" step="500">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                
-                                      <div class="row mt-5">
-                                        <div class="col-4 bar" style="text-align: center;">
-                                          <h5><i>Search horns by FARM names</i></h5>
-                                          <select id="farmList" class="selectpicker" multiple>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="4">Four</option>
-                                            <option value="5">five</option>
-                                            <option value="6">six</option>
-                                            <option value="7">seven</option>
-                                            <option value="8">eight</option>
-                                            <option value="9">nine</option>
-                                            <option value="10">ten</option>
-                                          </select>
-                                        </div>
-                
-                                        <div class="col-4"></div>
-                
-                                        <div class="col-4">
-                                          <h6>Sort by -</h6>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Default</span>
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Price [High -> Low]</span>
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Price [Low -> High]</span>
-                                            </label>
-                                          </div>
-                                        </div>
-                
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
                           <% } else if (locals.advType=="rawhide") { %>
                             <div class="accordion accordion-flush">
-                                <div class="accordion-item">
-                                  <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      <i>SORT OR FILTER ITEMS...</i>
-                                    </button>
-                                  </h2>
-                                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                      <div class="row">
-                                        <div class="col-4">
-                                          <div class="wrapper">
-                                            <header><h6><i>Price(BDT)</i></h6></header>
-                                            <div class="price-input1">
-                                              <div class="field1">
-                                                <span><i>Min</i></span>
-                                                <input type="number" class="input-min1" value="2500">
-                                              </div>
-                                              <div class="separator1">-</div>
-                                              <div class="field1">
-                                                <span><i>Max</i></span>
-                                                <input type="number" class="input-max1" value="75000">
-                                              </div>
+                              <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                  <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <i>SORT OR FILTER ITEMS...</i>
+                                  </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                  <form action="/homeByCategory/query/rawhide" method="post">
+                                  <div class="accordion-body">
+                                    
+                                    <div class="row">
+                                      <div class="col-4">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="price" id="price">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Use?</span>
+                                          </label>
+                                        </div>
+                                        <div class="wrapper">
+                                          <header><h6><i>Price per piece(BDT)</i></h6></header>
+                                          <div class="price-input1">
+                                            <div class="field1">
+                                              <span><i>Min</i></span>
+                                              <input type="number" class="input-min1" name="minPrice" value="125000">
                                             </div>
-                                            <div class="slider1">
-                                              <div class="progress1"></div>
+                                            <div class="separator1">-</div>
+                                            <div class="field1">
+                                              <span><i>Max</i></span>
+                                              <input type="number" class="input-max1" name="maxPrice" value="375000">
                                             </div>
-                                            <div class="range-input1">
-                                              <input type="range" class="range-min1" min="0" max="100000" value="2500" step="500">
-                                              <input type="range" class="range-max1" min="0" max="100000" value="75000" step="500">
-                                            </div>
+                                          </div>
+                                          <div class="slider1">
+                                            <div class="progress1"></div>
+                                          </div>
+                                          <div class="range-input1">
+                                            <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
+                                            <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
                                           </div>
                                         </div>
                                       </div>
-                
-                                      <div class="row mt-5">
-                                        <div class="col-4 bar" style="text-align: center;">
-                                          <h5><i>Search horns by FARM names</i></h5>
-                                          <select id="farmList" class="selectpicker" multiple>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="4">Four</option>
-                                            <option value="5">five</option>
-                                            <option value="6">six</option>
-                                            <option value="7">seven</option>
-                                            <option value="8">eight</option>
-                                            <option value="9">nine</option>
-                                            <option value="10">ten</option>
-                                          </select>
+                                      <div class="col-4">
+                                        
+                                        <div class="wrapper">
                                         </div>
-                
-                                        <div class="col-4"></div>
-                
-                                        <div class="col-4">
-                                          <h6>Sort by -</h6>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Default</span>
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Price [High -> Low]</span>
-                                            </label>
-                                          </div>
-                                          <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                              <span>Price [Low -> High]</span>
-                                            </label>
-                                          </div>
+                                      </div> 
+                                      <div class="col-4">
+                                        
+                                        <div class="wrapper">
                                         </div>
-                
                                       </div>
                                     </div>
+              
+                                    <div class="row mt-5">
+                                      
+                              
+                                      <div class="col-4 bar">
+                                        <header><h6><i>Seller name</i></h6></header>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Use?</span>
+                                          </label>
+                                        </div>
+                                        <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                        <div class="results2" style="color: #fff;">
+                                        </div>
+                                      </div>
+              
+                                      <div class="col-4">
+                                        <h6>Sort by -</h6>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Default</span>
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Price [High -> Low]</span>
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Price [Low -> High]</span>
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Default</span>
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Most recent</span>
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
+                                          <label class="form-check-label" for="flexRadioDefault1">
+                                            <span>Least recent</span>
+                                          </label>
+                                        </div>
+                                      </div>
+              
+                                    </div>
+                                    <div class="col-auto">
+                                      <button type="submit" class="btn btn-primary mb-3">Apply</button>
+                                    </div>
                                   </div>
+                                </form>
                                 </div>
                               </div>
-                            <% } else if (locals.advType=="cattleBid") { %>
-                                <div class="accordion accordion-flush">
-                                    <div class="accordion-item">
-                                      <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                          <i>SORT OR FILTER ITEMS...</i>
-                                        </button>
-                                      </h2>
-                                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                          <div class="row">
-                                            <div class="col-4">
-                                              <div class="wrapper">
-                                                <header><h6><i>Price(BDT)</i></h6></header>
-                                                <div class="price-input1">
-                                                  <div class="field1">
-                                                    <span><i>Min</i></span>
-                                                    <input type="number" class="input-min1" value="125000">
-                                                  </div>
-                                                  <div class="separator1">-</div>
-                                                  <div class="field1">
-                                                    <span><i>Max</i></span>
-                                                    <input type="number" class="input-max1" value="375000">
-                                                  </div>
-                                                </div>
-                                                <div class="slider1">
-                                                  <div class="progress1"></div>
-                                                </div>
-                                                <div class="range-input1">
-                                                  <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
-                                                  <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-4">
-                                              <div class="wrapper">
-                                                <header><h6><i>Weight (kg)</i></h6></header>
-                                                <div class="price-input2">
-                                                  <div class="field2">
-                                                    <span><i>Min</i></span>
-                                                    <input type="number" class="input-min2" value="125">
-                                                  </div>
-                                                  <div class="separator2">-</div>
-                                                  <div class="field2">
-                                                    <span><i>Max</i></span>
-                                                    <input type="number" class="input-max2" value="375">
-                                                  </div>
-                                                </div>
-                                                <div class="slider2">
-                                                  <div class="progress2"></div>
-                                                </div>
-                                                <div class="range-input2">
-                                                  <input type="range" class="range-min2" min="0" max="500" value="125" step="5">
-                                                  <input type="range" class="range-max2" min="0" max="500" value="375" step="5">
-                                                </div>
-                                              </div>
-                                            </div> 
-                                             <div class="col-4">
-                                              <div class="wrapper">
-                                                <header><h6><i>Age (Year)</i></h6></header>
-                                                <div class="price-input3">
-                                                  <div class="field3">
-                                                    <span><i>Min</i></span>
-                                                    <input type="number" class="input-min3" value="5">
-                                                  </div>
-                                                  <div class="separator3">-</div>
-                                                  <div class="field3">
-                                                    <span><i>Max</i></span>
-                                                    <input type="number" class="input-max3" value="15">
-                                                  </div>
-                                                </div>
-                                                <div class="slider3">
-                                                  <div class="progress3"></div>
-                                                </div>
-                                                <div class="range-input3">
-                                                  <input type="range" class="range-min3" min="0" max="20" value="5" step="1">
-                                                  <input type="range" class="range-max3" min="0" max="20" value="15" step="1">
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                    
-                                          <div class="row mt-5">
-                                            <div class="col-4 bar" style="text-align: center;">
-                                              <h5><i>Search cattles by FARM names</i></h5>
-                                              <select id="farmList" class="selectpicker" multiple>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                                <option value="5">five</option>
-                                                <option value="6">six</option>
-                                                <option value="7">seven</option>
-                                                <option value="8">eight</option>
-                                                <option value="9">nine</option>
-                                                <option value="10">ten</option>
-                                              </select>
-                                            </div>
-                    
-                                            <div class="col-4"></div>
-                    
-                                            <div class="col-4">
-                                              <h6>Sort by -</h6>
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                  <span>Default</span>
-                                                </label>
-                                              </div>
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                  <span>Price [High -> Low]</span>
-                                                </label>
-                                              </div>
-                                              <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                  <span>Price [Low -> High]</span>
-                                                </label>
-                                              </div>
-                                            </div>
-                    
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                            </div>
                               <% } %>
 
               

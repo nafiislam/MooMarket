@@ -250,36 +250,187 @@ router.post('/search/meatsubtype', async(req, res) => {
   }
 })
 
+function appendingSort(adder,sort,sort2,pricename){
+  if(sort!="default"&&sort2!="default"){
+    if(sort=="priceHighLow"){
+      adder+=` ORDER BY ${pricename} DESC `
+    }
+    else{
+      adder+=` ORDER BY ${pricename} ASC `
+    }
+    if(sort2=="mostRecent"){
+      adder+=`,created_at DESC `
+    }
+    else{
+      adder+=`,created_at ASC `
+    }
+  }
+  else if(sort!="default"){ 
+    if(sort=="priceHighLow")
+      adder+=` ORDER BY ${pricename} DESC `
+    else
+      adder+=` ORDER BY ${pricename} ASC `
+  }
+  else if(sort2!="default"){  
+    if(sort2=="mostRecent"){
+      adder+=` ORDER BY created_at DESC `
+    }
+    else{
+      adder+=` ORDER BY created_at ASC `
+    }
+  }
+  return adder;
+}
+
 router.post('/homeByCategory/query/:type', async(req, res) => {
-  if(req.query.type=="cattle"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
+  if(req.cookies['thana']){
+    if(req.params.type=="cattle"){
+      const {minPrice,maxPrice,search,search2,sort,sort2,price,farmname,sellername} = req.body;
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      //console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND price BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      if(farmname){
+        adder+=` AND farm_name='${search}' `
+      }
+      adder = appendingSort(adder,sort,sort2,'price');
+      //console.log(adder)
+
+      var cattleAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=false ) AS y) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<cattleAdvertisements.rows.length;i++){
+        cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+      }
+      // console.log(cattleAdvertisements.rows)
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows,advType:req.params.type}) 
+    }
+    else if(req.params.type=="meat"){
+      const {minPrice,maxPrice,search,search2,sort,sort2,price,subtype,sellername} = req.body;
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND price_per_kg BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      if(subtype){
+        adder+=` AND m_type='${search}' `
+      }
+      adder = appendingSort(adder,sort,sort2,'price_per_kg');
+      console.log(adder);
+      var meatAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (select *,meat_advertisement.type as m_type from advertisements JOIN meat_advertisement on advertisements.advertise_id=meat_advertisement.advertise_id) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<meatAdvertisements.rows.length;i++){
+        meatAdvertisements.rows[i].created_at=formatDate(JSON.stringify(meatAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+      }
+      console.log(meatAdvertisements.rows);
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows,advType:req.params.type})
+    }
+    else if(req.params.type=="horn"){
+      const {minPrice,maxPrice,search2,sort,sort2,price,sellername} = req.body;
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND selling_price_per_piece BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      adder = appendingSort(adder,sort,sort2,'selling_price_per_piece');
+      
+      var hornAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN horn_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<hornAdvertisements.rows.length;i++){
+        hornAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hornAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        hornAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hornAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+      }
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hornAdvertisements.rows,advType:req.params.type}) 
+    }
+    else if(req.params.type=="hoof"){
+      const {minPrice,maxPrice,search2,sort,sort2,price,sellername} = req.body;
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND selling_price_per_piece BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      adder = appendingSort(adder,sort,sort2,'selling_price_per_piece');
+
+      var hoofAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN hoof_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<hoofAdvertisements.rows.length;i++){
+        hoofAdvertisements.rows[i].created_at=formatDate(JSON.stringify(hoofAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        hoofAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(hoofAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+      }
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows,advType:req.params.type}) 
+    }
+    else if(req.params.type=="rawhide"){
+      const {minPrice,maxPrice,search2,sort,sort2,price,sellername} = req.body;
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND selling_price_per_piece BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      adder = appendingSort(adder,sort,sort2,'selling_price_per_piece');
+
+      var rawhideAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN rawhide_advertisement) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<rawhideAdvertisements.rows.length;i++){
+        rawhideAdvertisements.rows[i].created_at=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+        rawhideAdvertisements.rows[i].date_of_storage=formatDate(JSON.stringify(rawhideAdvertisements.rows[i].date_of_storage).split('T')[0].split('"')[1]);
+      }
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:rawhideAdvertisements.rows,advType:req.params.type}) 
+    }
+    else if(req.params.type=="cattleBid"){
+      const {minPrice,maxPrice,search,search2,sort,sort2,price,farmname,sellername} = req.body;
+      
+      const thana = req.cookies['thana']
+      const client = await pool.connect();
+      //console.log(req.body);
+      var adder=""
+      if(price){
+        adder +=` AND price BETWEEN ${minPrice} AND ${maxPrice} `
+      }
+      if(sellername){
+        adder+=` AND seller_id in(select user_id from users where name ='${search2}') `
+      }
+      if(farmname){
+        adder+=` AND farm_name='${search}' `
+      }
+      adder = appendingSort(adder,sort,sort2,'price');
+      //console.log(adder)
+
+      var cattleAdvertisements = await client.query("select * from (SELECT thana.name,users.user_id FROM thana join Users on thana.thana_id=users.thana_id)as c join (SELECT * FROM advertisements Natural JOIN ( SELECT * FROM cattle_advertisement JOIN ( SELECT * FROM cattle WHERE cattle_id IN (SELECT MIN(cattle_id)  FROM cattle GROUP BY cattle_advertise_id) ) AS x ON x.cattle_advertise_id = cattle_advertisement.advertise_id where is_bid=true ) AS y) as a on c.user_id= a.seller_id where c.name=$1 AND a.verified=true"+adder,[thana]);
+      client.release(true);
+      for(var i=0;i<cattleAdvertisements.rows.length;i++){
+        cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
+      }
+      // console.log(cattleAdvertisements.rows)
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows,advType:req.params.type}) 
+    }
   }
-  else if(req.query.type=="meat"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
-  }
-  else if(req.query.type=="horn"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
-  }
-  else if(req.query.type=="hoof"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
-  }
-  else if(req.query.type=="rawhide"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
-  }
-  else if(req.query.type=="cattleBid"){
-    const {minPrice,maxPrice,minWeight,maxWeight,minAge,maxAge,search,normal,priceHighLow,priceLowHigh,mostRecent,leastRecent} = req.body;
-    console.log(req.body);
-    console.log(priceHighLow)
+  else{
+    res.redirect('/coordinates')
   }
 })
 

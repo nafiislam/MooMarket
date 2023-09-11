@@ -7,19 +7,24 @@
     <title>Buyer registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/register.css" />
+    
   </head>
   <body>
+    <header>
+     <a href="/"> <div class="logo"></div></a>
+    </header>
+    <br>
     <a href="/register/buyer" class="button"><button class="btn btn-primary">Buyer</button></a>
     <a href="/register/seller" class="button"><button class="btn btn-primary">Seller</button></a>
     
     <div class="container">
         <form class="col g-3" action="/register/buyersubmit" method="post">
             <div class="col-auto">
-              <label for="Name" class="col-sm-2 col-form-label">Name</label>
+              <label for="Name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" name="name"placeholder="Name" required>
             </div>
             <div class="col-auto">
-              <label for="Email" class="col-sm-2 col-form-label">Email</label>
+              <label for="Email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="col-auto">
@@ -70,7 +75,7 @@
             <br>
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="agree" required>
-              <label class="form-check-label" for="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault" style="color: azure;">
                 I agree with term and conditions
               </label>
             </div>
@@ -80,6 +85,82 @@
             </div>
         </form>
     </div>
+
+    <div class="footer">
+      <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/"
+            >MooMarket.com</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/328bfce71b.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/scripts/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
