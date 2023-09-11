@@ -21,50 +21,27 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
           <!-- Logo on the left -->
-          <a class="navbar-brand" href="/"><img src="pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
+          <a class="navbar-brand" href="/"><img src="/pictures/LOGO.PNG" alt="Logo" width="150" height="60"></a>
 
           <!-- Middle Section: Search Bar -->
-          <div class="search">
-            <form>
-              <input id ="search" type="search" placeholder="Search..." oninput="searchHandler()">
-              <button type="submit">Search</button>
-            </form>
-            <div class="results" style="color: #fff;">
-              <!-- <ul>
-                <li>nafi</li>
-                <li>ruhan</li>
-                <li>nafi</li>
-                <li>ruhan</li>
-                <li>nafi</li>
-                <li>ruhan</li>
-              </ul> -->
+          <div class="input-group mb-3">
+            <button id="searchID" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search options</button>
+            <ul class="dropdown-menu" style="width:20px;">
+              <li><a class="dropdown-item" onclick="optionHandler(1)">Farmname</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" onclick="optionHandler(2)">Seller name</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" onclick="optionHandler(3)">Meat subtype</a></li>
+            </ul>
+            <div class="search">
+              <form id="form" action="/search/sellername" method="POST">
+                <input id ="search" name ="search" type="search" placeholder="Search..." oninput="searchHandler()" required>
+                <button type="submit">Search</button>
+              </form>
+              <div class="results" style="color: #fff;">
+              </div>
             </div>
           </div>
-          <script>
-            let arr =["Nafi","Nahin","Ruhan","sobaha","Suvro","Rashid"]
-            var searchBar = document.getElementById('search');
-            var results = document.querySelector('.results');
-
-            const searchHandler = ()=>{
-              var input = searchBar.value;
-              if(input!=""){
-                var suggestions = arr.filter((data)=>{
-                  return data.toLowerCase().startsWith(input.toLowerCase());
-                })
-                var html = suggestions.map((data)=>{
-                  return `<li onclick="clickHandler(this)">${data}</li>`
-                })
-                results.innerHTML =  `<ul>${html}</ul>`;
-              }
-              else{
-                results.innerHTML = '';
-              }
-            }
-            const clickHandler = (obj)=>{
-              searchBar.value=obj.innerHTML;
-              results.innerHTML='';
-            }
-          </script>
           <!-- Right Section: Login and Register Buttons -->
           <div class="ml-auto">
             <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: 7px;"></i></i><%=locals.thana%></button></a>
@@ -104,21 +81,21 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="pictures/cow1.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
+          <img src="/pictures/cow1.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
           <div class="carousel-caption d-none d-md-block">
             <h5>Moo Market</h5>
             <p>We respect your trust, ensures quality and honesty...</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="pictures/cow3.jpg" class="d-block w-100" alt="... " style="height: 600px; width: fit-content;">
+          <img src="/pictures/cow3.jpg" class="d-block w-100" alt="... " style="height: 600px; width: fit-content;">
           <div class="carousel-caption d-none d-md-block">
             <h5>Meat Market</h5>
             <p>Your Source for Quality Beef and More!<br> Your Local Beef Expert! Your national Beef Expert!</p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="pictures/cow2.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
+          <img src="/pictures/cow2.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
           <div class="carousel-caption d-none d-md-block">
             <h5>Cattle Market</h5>
             <p> Bringing the Farm to Your Fork!</p>
@@ -139,17 +116,17 @@
     <!-- ....................................................PRODUCTS SUMMARY.......................................................... -->
     <div class="div container produtcs" data-aos="fade-in" style="margin-top: 40px;">
       <div class="row justify-content-center">
-        <div class="col-1 product"><img src="pictures/auction.PNG" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/auction.PNG" alt="" class="productimg"></div>
         <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px; background: linear-gradient(to bottom, transparent, black, transparent);"></div></div>
-        <div class="col-1 product"><img src="pictures/cattlr.PNG" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/cattlr.PNG" alt="" class="productimg"></div>
         <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
-        <div class="col-1 product"><img src="pictures/meat.PNG" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/meat.PNG" alt="" class="productimg"></div>
         <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
-        <div class="col-1 product"><img src="pictures/horn.PNG" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/horn.PNG" alt="" class="productimg"></div>
         <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
-        <div class="col-1 product"><img src="pictures/hoof.PNG" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/hoof.PNG" alt="" class="productimg"></div>
         <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
-        <div class="col-1 product"><img src="pictures/hoof.jpeg" alt="" class="productimg"></div>
+        <div class="col-1 product"><img src="/pictures/hoof.jpeg" alt="" class="productimg"></div>
       </div>
       
       <div class="row justify-content-center">
@@ -201,7 +178,7 @@
     <!-- ....................................................HOT DEALS.......................................................... -->
     <div class="container-fluid">
       <div class="hotdealimg" data-aos="flip-left">
-        <img src="pictures/hot_deal.png" alt="..." class="hotimg">
+        <img src="/pictures/hot_deal.png" alt="..." class="hotimg">
       </div>
 
       <div class=""><hr class=""></div>
@@ -585,6 +562,7 @@
     ></script>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="/scripts/home.js"></script>
   <script>
     AOS.init({
       offset: 200,
