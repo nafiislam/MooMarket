@@ -36,27 +36,192 @@
     <!-- ....................................................END NAVBAR.......................................................... -->
 
     <% if(locals.type1 == "1") { %>
-        <div class="row videodiv mt-5">
-            <div class="col-6" style="text-align: left;">
-                <video width="500" height="240" controls>
-                    <source src="/pictures/movie.mp4" type="video/mp4">
-                    <source src="/pictures/movie.ogg" type="video/ogg">
-                    Your browser does not support the video tag.
-                  </video>
-            </div>
-    
-            <div class="col-2"></div>
-    
-            <div class="col-2 infowrap" style="text-align: left;">
-                  <div class="info">
-                    <h2 class="name/id" style="color: brown;">Cattle id : 23</h2>
-                    <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">2,00,000 BDT</p>
-                    <p style="margin-top: 10px; color: rgb(94, 3, 3);">Mankgang, Dhaka</p>
-                    <br>
-                    <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+       <!-- <div class="general"> -->
+    <!-- <div class="infowrap" style="text-align: left;"> -->
+        <div class="info1">
+            <h2 class="name/id" style="color: brown;">Quantity : 5</h2>
+            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total Price: 10,00,000 BDT</p>
+            <p style="margin-top: 10px; color: rgb(94, 3, 3);">Mankgang, Dhaka</p>
+            <br>
+            <% if(locals.user=="1") { %>
+                <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+                <% } else if (locals.user=="2") { %>
+                    <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Accept</button>
+                    <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Reject</button>
+                    <% } %>
+          </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  
+  
+      <!-- Tab links -->
+      <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Cattle1</button>
+          <button class="tablinks" onclick="openCity(event, 'Paris')">Cattle2</button>
+      </div>
+      
+      <!-- Tab content -->
+      <div id="London" class="tabcontent">
+                          
+      <div class="row videodiv mt-5">
+          <div class="col-6" style="text-align: left;">
+              <video width="500" height="240" controls>
+                  <source src="movie.mp4" type="video/mp4">
+                  <source src="movie.ogg" type="video/ogg">
+                  Your browser does not support the video tag.
+                </video>
+          </div>
+  
+          <div class="col-2"></div>
+         
+      </div>
+  
+      <hr class="center-hr">
+      
+      <!-- <div class="fourpics"> -->
+           <!-- Images used to open the lightbox -->
+          <div class="row1 photos">
+              <div class="column1">
+                  <img src="cow1.jpg" class="hover-shadow">
+                  <div class="overlay" onclick="openModal();currentSlide(1)">
+                      <div class="text">View Full</div>
                   </div>
-            </div>
-        </div>
+              </div>
+              <div class="column1">
+                  <img src="cow2.jpg" class="hover-shadow">
+                  <div class="overlay" onclick="openModal();currentSlide(2)">
+                      <div class="text">View Full</div>
+                  </div>                                                                            
+              </div>
+              <div class="column1">
+                  <img src="cow3.jpg"class="hover-shadow">
+                  <div class="overlay" onclick="openModal();currentSlide(3)">
+                      <div class="text">View Full</div>
+                   </div>
+              </div>
+              <div class="column1">
+                  <img src="cow4.jpg" class="hover-shadow">
+                  <div class="overlay" onclick="openModal();currentSlide(4)">
+                      <div class="text">View Full</div>
+                  </div>
+              </div>
+          </div>
+    
+          <!-- The Modal/Lightbox -->
+          <div id="myModal" class="modal">
+              <span class="close cursor" onclick="closeModal()">&times;</span>
+              <div class="modal-content">
+          
+              <div class="mySlides">
+                  <div class="numbertext">1 / 4</div>
+                  <img class="maindemo" src="cow1.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                  <div class="numbertext">2 / 4</div>
+                  <img class="maindemo" src="cow2.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                  <div class="numbertext">3 / 4</div>
+                  <img class="maindemo" src="cow3.jpg" style="width:100%">
+              </div>
+          
+              <div class="mySlides">
+                  <div class="numbertext">4 / 4</div>
+                  <img class="maindemo" src="cow4.jpg" style="width:100%">
+              </div>
+          
+              <!-- Next/previous controls -->
+              <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+              <!-- Caption text -->
+              <div class="caption-container">
+                  <p id="caption"></p>
+              </div>
+          
+              <!-- Thumbnail image controls -->
+              <div class="row">
+                  <div class="column">
+                      <img class="demo" src="cow1.jpg" onclick="currentSlide(1)" alt="Nature">
+                  </div>
+              
+                  <div class="column">
+                      <img class="demo" src="cow2.jpg" onclick="currentSlide(2)" alt="Snow">
+                  </div>
+              
+                  <div class="column">
+                      <img class="demo" src="cow3.jpg" onclick="currentSlide(3)" alt="Mountains">
+                  </div>
+              
+                  <div class="column">
+                      <img class="demo" src="cow4.jpg" onclick="currentSlide(4)" alt="Lights">
+                  </div>
+              </div>
+              </div>
+          </div>
+      <!-- </div> -->
+  
+  
+  
+  
+  
+      <div class="background-box">
+          <div class="column-wrapper">
+              <div class="left-column">
+                  <h3>Product Details</h3>
+                  <hr>
+                  <h6 style="opacity: 0.6; margin-bottom: 5px;">Price : 2000000 BDT</h6>
+                  <p>Weight : 150Kg</p>
+                  <p>Color : Red</p>
+                  <p>Age : 4 years</p>
+                  <p>Gender : Female</p>
+                  <br>
+                  <p>Veterinary : verified <i class="fa-solid fa-circle-check" style="color: #005eff; margin-left: 5px;"></i></p>
+                  <!-- <i class="fa-solid fa-circle-xmark" style="color: #ff2600;"></i>        for cross -->
+                  <a href=""><i class="fa-solid fa-download" style="margin-right: 15px;"></i><u>Download Certificate</u></a>
+              </div>
+              <div class="right-column">
+                  <h3>Seller Info</h3>
+                  <hr>
+                  <div class="row">
+                      <div class="col-6 info-details">
+                          <h5>Name : Nafi Loves Sobaha</h5>
+                          <p>Location : Singair, Manikganj, Dhaka, Bangladesh</p>
+                          <p style="color: rgb(45, 0, 245);">Contact No : <u>01500000011</u>,  <u>01584793245</u></p>
+                          <br>
+                          <br>
+                          <p>Overall Rating Of this Seller:</p>
+                          <div class="rate">
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-solid fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                              <i class="fa-regular fa-star"></i>
+                          </div>
+                      </div>
+                      <div class="col-6 text-end info-link">
+                          <img src="cow4.jpg" alt="">
+                          <button class="btn btn-secondary productbutt"></i>View Details<i class="fa-solid fa-arrow-up-right-from-square fa-beat-fade iconcart" style="margin-left: 8px;"></i></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <hr>
+          <div class="description">
+              <h3><u>Description</u></h3>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet inventore animi magni voluptate exercitationem omnis ipsum eum hic adipisci fugit, soluta corrupti enim ullam voluptatum nihil modi asperiores, corporis sit! Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, a!
+              </p>
+          </div>
+      </div>
+  
+      </div>
+      
+      <div id="Paris" class="tabcontent">
+          <h3>Paris</h3>
+          <p>Paris is the capital of France.</p>
+      </div>
     
         <% } else if (locals.type1=="2") { %>
             <div class="row videodiv mt-5">
@@ -104,94 +269,7 @@
         <% } %>
 
     <hr class="center-hr">
-    <% if(locals.type1=="1") { %>
-    <!-- <div class="fourpics"> -->
-         <!-- Images used to open the lightbox -->
-        <div class="row1 photos">
-            <div class="column1">
-                <img src="/pictures/cow1.jpg" class="hover-shadow">
-                <div class="overlay" onclick="openModal();currentSlide(1)">
-                    <div class="text">View Full</div>
-                </div>
-            </div>
-            <div class="column1">
-                <img src="/pictures/cow2.jpg" class="hover-shadow">
-                <div class="overlay" onclick="openModal();currentSlide(2)">
-                    <div class="text">View Full</div>
-                </div>                                                                            
-            </div>
-            <div class="column1">
-                <img src="/pictures/cow3.jpg"class="hover-shadow">
-                <div class="overlay" onclick="openModal();currentSlide(3)">
-                    <div class="text">View Full</div>
-                 </div>
-            </div>
-            <div class="column1">
-                <img src="/pictures/cow4.jpg" class="hover-shadow">
-                <div class="overlay" onclick="openModal();currentSlide(4)">
-                    <div class="text">View Full</div>
-                </div>
-            </div>
-        </div>
-  
-        <!-- The Modal/Lightbox -->
-        <div id="myModal" class="modal">
-            <span class="close cursor" onclick="closeModal()">&times;</span>
-            <div class="modal-content">
-        
-            <div class="mySlides">
-                <div class="numbertext">1 / 4</div>
-                <img class="maindemo" src="/pictures/cow1.jpg" style="width:100%">
-            </div>
-        
-            <div class="mySlides">
-                <div class="numbertext">2 / 4</div>
-                <img class="maindemo" src="/pictures/cow2.jpg" style="width:100%">
-            </div>
-        
-            <div class="mySlides">
-                <div class="numbertext">3 / 4</div>
-                <img class="maindemo" src="/pictures/cow3.jpg" style="width:100%">
-            </div>
-        
-            <div class="mySlides">
-                <div class="numbertext">4 / 4</div>
-                <img class="maindemo" src="/pictures/cow4.jpg" style="width:100%">
-            </div>
-        
-            <!-- Next/previous controls -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        
-            <!-- Caption text -->
-            <div class="caption-container">
-                <p id="caption"></p>
-            </div>
-        
-            <!-- Thumbnail image controls -->
-            <div class="row">
-                <div class="column">
-                    <img class="demo" src="/pictures/cow1.jpg" onclick="currentSlide(1)" alt="Nature">
-                </div>
-            
-                <div class="column">
-                    <img class="demo" src="/pictures/cow2.jpg" onclick="currentSlide(2)" alt="Snow">
-                </div>
-            
-                <div class="column">
-                    <img class="demo" src="/pictures/cow3.jpg" onclick="currentSlide(3)" alt="Mountains">
-                </div>
-            
-                <div class="column">
-                    <img class="demo" src="/pictures/cow4.jpg" onclick="currentSlide(4)" alt="Lights">
-                </div>
-            </div>
-            </div>
-        </div>
-    <!-- </div> -->
-    <% } %>
-
-
+   
 
 
     <div class="background-box">
@@ -199,16 +277,6 @@
             <div class="left-column">
                 <h3>Product Details</h3>
                 <hr>
-                <% if(locals.type1=="1") { %>
-                <p>Weight : 150Kg</p>
-                <p>Color : Red</p>
-                <p>Age : 4 years</p>
-                <p>Gender : Female</p>
-                <br>
-                <p>Veterinary : verified <i class="fa-solid fa-circle-check" style="color: #005eff; margin-left: 5px;"></i></p>
-                <!-- <i class="fa-solid fa-circle-xmark" style="color: #ff2600;"></i>        for cross -->
-                <a href=""><i class="fa-solid fa-download" style="margin-right: 5px;"></i><u>Download Certificate</u></a>
-                <% } else { %>
                     <% if(locals.type2=="1") { %>
                         <p>Quantity Available : 150Kg</p>
                         <% }else { %>
