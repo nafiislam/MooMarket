@@ -95,7 +95,7 @@ html {
     align-items: center;
     background-color: transparent; /* Transparent white background */
     border-radius: 0px;
-    backdrop-filter: blur(40px);
+    /* backdrop-filter: blur(5px); */
   }
 
   .form-label{
@@ -124,3 +124,31 @@ html {
     height: 200px;
     width: 400px;
   }
+
+  /* login.css */
+.login-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-transition:hover {
+  transform: scale(1.25); /* Adjust the scale factor as needed */
+}
+
+/* login.css */
+/* Add this CSS for the loading spinner */
+.loading-spinner {
+  display: none; 
+  /* Initially hidden */
+  margin-left: 25px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #007bff; /* Your primary color */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite; /* Rotate the spinner */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

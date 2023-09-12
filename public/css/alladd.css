@@ -407,7 +407,7 @@ input[type="search"]::placeholder {
     background-color: #e7f0dd;
     color: brown;
     border-radius: 0;
-    padding: 40px;
+    padding: 10px;
     margin: 0;
     text-align: left;
     font-size: 20px;
@@ -421,7 +421,7 @@ input[type="search"]::placeholder {
     color: #000;
     border: none;
     border-radius: 0;
-    padding: 40px;
+    padding: 10px;
     margin: 0;
     text-align: left;
     font-size: 15px;
@@ -433,7 +433,7 @@ input[type="search"]::placeholder {
     color: #000;
     border: none;
     border-radius: 0;
-    padding: 40px;
+    padding: 10px;
     margin: 0;
     text-align: left;
     font-size: 15px;
@@ -444,7 +444,7 @@ input[type="search"]::placeholder {
     background-color: #e7f0dd;
     color: brown;
     border-radius: 0;
-    padding: 40px;
+    padding: 10px;
     margin: 0;
     text-align: left;
     font-size: 20px;
