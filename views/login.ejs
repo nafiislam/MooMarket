@@ -13,16 +13,20 @@
       <a href="/"> <div class="logo"></div></a>
     </header> -->
     <div class="wrapper left-right-together">
+
+
       <div class="left">
         <!-- <div class="welcome">Welcome to</div> -->
         <br>
         <div class="">
           <br>
-          <img src="/pictures/logo.png" class="imagebox" alt="paina">
+          <img src="/pictures/logo.png" class="imagebox login-transition" alt="paina">
         </div>
+        <br>
+        <div class="loading-spinner" id="loading-spinner"></div>
       </div>
       <div class="right">
-        <div class="login-box">
+        <div class="login-box login-transition">
         <form class="col g-3" action="/login" method="post">
           <div class="col-auto">
             <label for="Phone number" class="form-label">Phone number</label>
@@ -33,7 +37,8 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-5">Login</button>
+            <button type="submit" class="btn btn-primary mb-5"  id="login-button">Login</button>
+            <!-- <div class="loading-spinner" id="loading-spinner"></div> -->
           </div>
           <div class="col-auto">
             <a href="/login/forgetPassword">Forgot Password</a>
@@ -114,6 +119,27 @@
         <!-- Copyright -->
       </footer>
     </div>
+    <script>
+            // $(document).ready(function() {
+            //     $("#login-button").click(function() {
+            //         console.log("helloooooo");
+            //         // Show the loading spinner
+            //         $("#loading-spinner").show();
+                    
+            //         // Hide the login button
+            //         $(this).hide();
+                    
+            //         // Simulate a delay (replace with actual page load code)
+            //         setTimeout(function() {
+            //             // Redirect to the next page (replace with your actual URL)
+            //             // window.location.href = "/dashboard";
+            //         }, 2000); // Adjust the delay time as needed (2 seconds in this example)
+            //     });
+            // });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script
       src="https://kit.fontawesome.com/328bfce71b.js"
       crossorigin="anonymous"
