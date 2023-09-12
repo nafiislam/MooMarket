@@ -55,31 +55,36 @@
     <% if(locals.advType == "cattle") { %>
        <!-- <div class="general"> -->
     <!-- <div class="infowrap" style="text-align: left;"> -->
-        <div class="info1">
-            <h2 class="name/id" style="color: brown;">Quantity : <%=locals.advertisement.quantity%></h2>
-            <% if(locals.advertisement.is_bid){ %>
-              <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total minimum bid Price:  <%=locals.advertisement.price%> BDT</p>
-            <% }else{ %>
-              <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total Fixed Price:  <%=locals.advertisement.price%> BDT</p>
-            <% } %>
-            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Farm name: <%= locals.advertisement.farm_name %></p>
-            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Advertised at: <%=locals.advertisement.created_at%></p>
-            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">
-              <% if(locals.advertisement.status=="unfinished"){ %>
-                <span style="color:green"><br>Status: Available</span>
-              <%}else{%>
-                <span style="color:red"><br>Status: Not available</span>
-              <% } %>
-          </p>
-            <br>
-            <div class="container1">
+        <div class="info1 row">
+            <div class="col-6">
+                <h2 class="name/id" style="color: brown;">Quantity : <%=locals.advertisement.quantity%></h2>
+                <% if(locals.advertisement.is_bid){ %>
+                <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total minimum bid Price:  <%=locals.advertisement.price%> BDT</p>
+                <% }else{ %>
+                <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total Fixed Price:  <%=locals.advertisement.price%> BDT</p>
+                <% } %>
+                <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Farm name: <%= locals.advertisement.farm_name %></p>
+                <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Advertised at: <%=locals.advertisement.created_at%></p>
+                <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">
+                <% if(locals.advertisement.status=="unfinished"){ %>
+                    <span style="color:green"><br>Status: Available</span>
+                <%}else{%>
+                    <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+            </p>
+                <br>
+            </div>
+            <div class="col-6">
+
+            <!-- <div class="container1"> -->
             <% if(locals.session) { %>
                 <div class="d-flex flex-column mt-4">
                     <a class="btn btn-success w-70 mb-2" role="button" href="/singleAdvertisement/admin/accept/<%= locals.advertisement.advertise_id %>">Accept</a>
                     <a class="btn btn-danger w-70" role="button" href="/singleAdvertisement/admin/reject/<%= locals.advertisement.advertise_id %>">Reject</a>
                 </div>
             <% } %>
-          </div>
+            </div>
+          <!-- </div> -->
         </div>
       <!-- </div> -->
     <!-- </div> -->
