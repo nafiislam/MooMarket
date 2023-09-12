@@ -51,9 +51,9 @@ html {
 
   
 .logo {
-    background-image: url("../pictures/373454364_260518726818122_6762046698104647155_n.png");
-    width: 140px;
-    height: 70px; 
+    background-image: url("../pictures/logo.png");
+    width: 400px;
+    height: 200px; 
     position: top;
     background-repeat: no-repeat;
     /*z-index: 3;*/
@@ -63,13 +63,22 @@ html {
     /* overflow: hidden; Clip any content that goes beyond the rounded corners */
   }
 
+  .welcome{
+    font-weight: bold;
+  }
+
   .wrapper{
     display: flex;
   }
 
+  .left-right-together{
+    background-image: url("../pictures/login-bg.jpeg"); /* Replace 'your-image.jpg' with the path to your image */ 
+    background-size: cover;
+  }
+
   .left{
     flex: 1;
-    background-image: url("../pictures/istockphoto-1169868287-612x612.jpg"); /* Replace 'your-image.jpg' with the path to your image */ 
+    background-color: transparent;
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -84,8 +93,8 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black; /* Transparent white background */
-    border-radius: 50px;
+    background-color: transparent; /* Transparent white background */
+    border-radius: 0px;
     backdrop-filter: blur(40px);
   }
 
@@ -94,10 +103,9 @@ html {
   }
 
   .login-box {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     padding: 20px;
     border-radius: 10px;
-
   }
 
   header, footer {
@@ -110,4 +118,9 @@ html {
     max-height: 70px; /* Set the maximum desired height for your image */
     width: auto; /* Let the width adjust to fit the aspect ratio */
     height: auto; /* Let the height adjust to fit the aspect ratio */
+  }
+
+  .imagebox{
+    height: 200px;
+    width: 400px;
   }
