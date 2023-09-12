@@ -59,5 +59,5 @@ const coordinatesRouter = require('./Routes/coordinates');
 app.use('/coordinates',coordinatesRouter);
 
 app.listen(3000,(req, res) => {
-    console.log('running port........');
+    console.log('running port........ at http://localhost:3000');
 });

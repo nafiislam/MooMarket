@@ -261,17 +261,24 @@
                                     <p>change quantity(pcs) :</p>
                                     <% } %>
 
-                        <div class="container1">
-                                <button class="minus-button"  onclick="decreaseValue()">-</button>
-                                <input type="number" id="number" class="input-field" placeholder="0">
-                                <button class="plus-button"  onclick="increaseValue()">+</button>
-                        </div>
-                        <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+                                    <% if(locals.type=="buyer") { %>
+                                        <div class="container1">
+                                            <button class="minus-button"  onclick="decreaseValue()">-</button>
+                                            <input type="number" id="number" class="input-field" placeholder="0">
+                                            <button class="plus-button"  onclick="increaseValue()">+</button>
+                                    </div>
+                                    <button class="btn btn-secondary productbutt"><i class="fa-solid fa-circle-check fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+                                     <% } else if (locals.type=="admin") { %>
+                                            <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Accept</button>
+                                            <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Reject</button>
+                                    <% } %>
+
+                        
                       </div>
                 </div>
             </div>
 
-        <% } %>
+        <!-- <% } %> -->
 
     <hr class="center-hr">
    
@@ -290,7 +297,7 @@
                     <p>Cow Slautered : 4 days Ago</p>
                     <p>Gender : Female</p>
                     <br>
-                <% } %>
+                <!-- <% } %> -->
             </div>
             <div class="right-column">
                 <h3>Seller Info</h3>
@@ -330,6 +337,7 @@
             </p>
         </div>
     </div>
+    <% } %>
 
     
 
