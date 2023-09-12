@@ -224,8 +224,8 @@ router.post('/search/farmname', async(req, res) => {
     for(var i=0;i<cattleAdvertisements.rows.length;i++){
       cattleAdvertisements.rows[i].created_at=formatDate(JSON.stringify(cattleAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
     }
-    
-    res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows}) 
+    //res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:hoofAdvertisements.rows,advType:req.params.category}) 
+    res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:cattleAdvertisements.rows,advType:"cattle"}) 
   }
   else{
     res.redirect('/coordinates')
@@ -243,7 +243,7 @@ router.post('/search/meatsubtype', async(req, res) => {
         meatAdvertisements.rows[i].created_at=formatDate(JSON.stringify(meatAdvertisements.rows[i].created_at).split('T')[0].split('"')[1]);
       }
       console.log(meatAdvertisements.rows)
-      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows}) 
+      res.render('homeByCategory',{session:req.session.phone_number,type:req.session.type,allAdvertisements:meatAdvertisements.rows,advType:"meat"}) 
   }
   else{
     res.redirect('/coordinates')
