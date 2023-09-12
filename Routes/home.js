@@ -435,7 +435,7 @@ router.post('/homeByCategory/query/:type', async(req, res) => {
 })
 
 router.get('/search', async(req, res) => {
-  res.render('homeByCategory', {type:"1"})
+  res.render('singleAdd', {type1:"1",type2:"2",user:"1"})
 })
 
 module.exports = router;

@@ -3,37 +3,84 @@ const router = express.Router();
 
 const { pool } = require("../db");
 
+function formatDate(inputDate) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+  
+    const dateParts = inputDate.split('-');
+    const year = dateParts[0];
+    const month = months[parseInt(dateParts[1], 10) - 1];
+    const day = parseInt(dateParts[2], 10);
+  
+    // Function to add the "st", "nd", "rd", or "th" suffix to the day
+    function getDayWithSuffix(day) {
+      if (day >= 11 && day <= 13) {
+        return day + 'th';
+      }
+      switch (day % 10) {
+        case 1:
+          return day + 'st';
+        case 2:
+          return day + 'nd';
+        case 3:
+          return day + 'rd';
+        default:
+          return day + 'th';
+      }
+    }
+  
+    const formattedDate = `${getDayWithSuffix(day)} ${month}, ${year}`;
+    return formattedDate;
+  }
+
 router.get('/buyer/:id', async(req, res) => {
     var advertisement,cattle;
     const client = await pool.connect();
+    const seller = await client.query("SELECT * FROM advertisements join users on seller_id=user_id WHERE advertise_id=$1", [req.params.id]);
     const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
+
+    const rating = await client.query("SELECT avg(rating) FROM advertisements join rating on advertisements.advertise_id=rating.advertise_id WHERE rating.advertise_id=$1", [req.params.id]);
+    if(type.rows.length==0){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
+        return;
+    }
     if(type.rows[0].type=="meat"){
         advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
+        advertisement.rows[0].created_at=formatDate(JSON.stringify(advertisement.rows[0].created_at).split('T')[0].split('"')[1]);
     }
     else if(type.rows[0].type=="cattle"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN cattle_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
         cattle = await client.query("SELECT * FROM cattle WHERE cattle_advertise_id=$1", [req.params.id]);
+        advertisement.rows[0].created_at=formatDate(JSON.stringify(advertisement.rows[0].created_at).split('T')[0].split('"')[1]);
     }
     else if(type.rows[0].type=="rawhide"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN rawhide_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
+        advertisement.rows[0].created_at=formatDate(JSON.stringify(advertisement.rows[0].created_at).split('T')[0].split('"')[1]);
+        advertisement.rows[0].date_of_storage=formatDate(JSON.stringify(advertisement.rows[0].date_of_storage).split('T')[0].split('"')[1]);
     }
     else if(type.rows[0].type=="horn"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN horn_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
+        advertisement.rows[0].created_at=formatDate(JSON.stringify(advertisement.rows[0].created_at).split('T')[0].split('"')[1]);
+        advertisement.rows[0].date_of_storage=formatDate(JSON.stringify(advertisement.rows[0].date_of_storage).split('T')[0].split('"')[1]);
     }
     else if(type.rows[0].type=="hoof"){
         advertisement = await client.query("SELECT * FROM advertisements Natural JOIN hoof_advertisement WHERE advertise_id=$1 AND advertisements.verified=true", [req.params.id]);
+        advertisement.rows[0].created_at=formatDate(JSON.stringify(advertisement.rows[0].created_at).split('T')[0].split('"')[1]);
+        advertisement.rows[0].date_of_storage=formatDate(JSON.stringify(advertisement.rows[0].date_of_storage).split('T')[0].split('"')[1]);
     }
     client.release(true);
-    //console.log(advertisement.rows);
+    console.log(advertisement.rows);
     if(advertisement.rows.length==0){
         res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
         return;
     }
     if( type.rows[0].type=="cattle" ){
-        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type,cattle:cattle.rows})
+        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type,cattle:cattle.rows,seller:seller.rows[0],rating:rating.rows})
     }
     else{
-        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type})
+        res.render('singleAdvertisementBuyer',{session:req.session.phone_number,type:req.session.type,advertisement:advertisement.rows[0],advType:type.rows[0].type,seller:seller.rows[0],rating:rating.rows})
     }
 })
 
@@ -41,6 +88,10 @@ router.get('/seller/:id', async(req, res) => {
     var advertisement;
     const client = await pool.connect();
     const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
+    if(type.rows.length==0){
+        res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
+        return;
+    }
     if(type.rows[0].type=="meat"){
         advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
     }
@@ -115,6 +166,10 @@ router.get('/admin/:id', async(req, res) => {
             var advertisement,cattle;
             const client = await pool.connect();
             const type = await client.query("SELECT type FROM advertisements WHERE advertise_id=$1", [req.params.id]);
+            if(type.rows.length==0){
+                res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement not found"})
+                return;
+            }
             if(type.rows[0].type=="meat"){
                 advertisement = await client.query("SELECT  *, meat_advertisement.type AS meatType FROM meat_advertisement JOIN advertisements  ON advertisements.advertise_id=meat_advertisement.advertise_id WHERE advertisements.advertise_id=$1", [req.params.id]);
             }

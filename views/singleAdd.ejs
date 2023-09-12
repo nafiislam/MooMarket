@@ -48,12 +48,12 @@
             <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total Price: 10,00,000 BDT</p>
             <p style="margin-top: 10px; color: rgb(94, 3, 3);">Mankgang, Dhaka</p>
             <br>
-            <% if(locals.type=="buyer") { %>
+            <% if(locals.user=="1") { %>
                 <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
-             <% } else if (locals.type=="admin") { %>
+                <% } else if (locals.user=="2") { %>
                     <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Accept</button>
                     <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Reject</button>
-            <% } %>
+                    <% } %>
           </div>
       <!-- </div> -->
     <!-- </div> -->
