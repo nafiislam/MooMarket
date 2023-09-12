@@ -39,7 +39,7 @@
                 <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
                   Dashboard
                 </button>
-                <ul class="dropdown-menu" style="background-color: #000000;">
+                <ul class="dropdown-menu" style="background-color: #000000; margin-left: -20px;">
                   <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
                   <% if(locals.type=="seller"){ %>
                     <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
@@ -737,7 +737,137 @@
                                 </div>
                               </div>
                             </div>
-                              <% } %>
+                                <% }else if(locals.advType=="cattleBid") { %>
+                                  <div class="accordion accordion-flush">
+                                      <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                          <button class="accordion-button collapsed" id="myButton" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <i>SORT OR FILTER ITEMS...</i>
+                                          </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                          <form action="/homeByCategory/query/cattle" method="post">
+                                          <div class="accordion-body">
+                                            
+                                            <div class="row">
+                                              <div class="col-4">
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" name="price" id="price">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Use?</span>
+                                                  </label>
+                                                </div>
+                                                <div class="wrapper">
+                                                  <header><h6><i>Price(BDT)</i></h6></header>
+                                                  <div class="price-input1">
+                                                    <div class="field1">
+                                                      <span><i>Min</i></span>
+                                                      <input type="number" class="input-min1" name="minPrice" value="125000">
+                                                    </div>
+                                                    <div class="separator1">-</div>
+                                                    <div class="field1">
+                                                      <span><i>Max</i></span>
+                                                      <input type="number" class="input-max1" name="maxPrice" value="375000">
+                                                    </div>
+                                                  </div>
+                                                  <div class="slider1">
+                                                    <div class="progress1"></div>
+                                                  </div>
+                                                  <div class="range-input1">
+                                                    <input type="range" class="range-min1" min="0" max="500000" value="125000" step="1000">
+                                                    <input type="range" class="range-max1" min="0" max="500000" value="375000" step="1000">
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-4">
+                                                
+                                                <div class="wrapper">
+                                                </div>
+                                              </div> 
+                                              <div class="col-4">
+                                                
+                                                <div class="wrapper">
+                                                </div>
+                                              </div>
+                                            </div>
+                      
+                                            <div class="row mt-5">
+                                              <div class="col-4 bar">
+                                                <header><h6><i>Farms</i></h6></header>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" name="farmname" id="flexRadioDefault2">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Use?</span>
+                                                  </label>
+                                                </div>
+                                                <input id ="search" style="border: 1px solid" name ="search" type="search" placeholder="Search..." oninput="searchHandler()">
+                                                <div class="results" style="color: #fff;">
+                                                </div>
+                                              </div>
+                                      
+                                              <div class="col-4 bar">
+                                                <header><h6><i>Seller name</i></h6></header>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" name="sellername" id="flexRadioDefault2">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Use?</span>
+                                                  </label>
+                                                </div>
+                                                <input id ="search2" style="border: 1px solid" name ="search2" type="search" placeholder="Search..." oninput="searchHandler2()">
+                                                <div class="results2" style="color: #fff;">
+                                                </div>
+                                              </div>
+                      
+                                              <div class="col-4">
+                                                <h6>Sort by -</h6>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="default" name="sort" id="flexRadioDefault1" checked>
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Default</span>
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="priceHighLow" name="sort" id="flexRadioDefault2">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Price [High -> Low]</span>
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="priceLowHigh" name="sort" id="flexRadioDefault3">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Price [Low -> High]</span>
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="default" name="sort2" id="flexRadioDefault1" checked>
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Default</span>
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="mostRecent" name="sort2" id="flexRadioDefault4">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Most recent</span>
+                                                  </label>
+                                                </div>
+                                                <div class="form-check">
+                                                  <input class="form-check-input" type="radio" value="leastRecent" name="sort2" id="flexRadioDefault5">
+                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                    <span>Least recent</span>
+                                                  </label>
+                                                </div>
+                                              </div>
+                      
+                                            </div>
+                                            <div class="col-auto">
+                                              <button type="submit" class="btn btn-primary mb-3">Apply</button>
+                                            </div>
+                                          </div>
+                                        </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <% } %>
 
               
 
