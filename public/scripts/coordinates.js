@@ -85,6 +85,7 @@ function thanaHandler(){
         return res.json();
     })
     .then(data => {
+        //console.log("running1")
         var coordinates = data;
         var ggwp = []
         console.log(coordinates);
@@ -99,7 +100,7 @@ function thanaHandler(){
             minLat = Math.min(minLat, parseFloat(coordinates[i].lat));
             maxLat = Math.max(maxLat, parseFloat(coordinates[i].lat));
         }
-
+        //console.log("running2")
         const map = new google.maps.Map(document.getElementById("map"), {
             center: { lng: (maxLng+minLng)/2.0,lat:(maxLat+minLat)/2.0 },
             zoom: 10,
@@ -114,6 +115,7 @@ function thanaHandler(){
             fillOpacity: 0.35,
         });
         polygon.setMap(map);
+        //console.log("running")
     })
     .catch(err => {
         console.log(err.Error);

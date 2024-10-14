@@ -6,3 +6,60 @@
 .container {
     position: relative !important;
 }
+
+body{
+  background-color: #F4EBD0;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-select,
+.form-select:hover,
+.form-select:focus {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #D6AD60;
+  color: white;
+  opacity: 0.9;
+  transition: background-color 0.3s ease;
+}
+
+/* Change the background color on hover and focus */
+.form-select:hover,
+.form-select:focus {
+  background-color: #B68D40;
+}
+
+
+.productbutton {
+  text-align: center;
+  padding: 5px;
+}
+
+.productbutt {
+  background-color: #4b7eff;
+  border-radius: 5px;
+  border: none;
+  color: #F4EBD0;
+  /* opacity: 0.7; */
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+  align-items: center;
+  width: 150px;
+  height: 35px;
+  box-shadow: 2px 3px 10px 0 #161616;
+
+}
+
+.productbutt:hover {
+  box-shadow: 3px 4px 10px 5px #eaeaed;
+  background-color: #618cf9;
+  color: black;
+}

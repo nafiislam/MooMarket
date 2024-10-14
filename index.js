@@ -28,6 +28,9 @@ const nodemailer=require('nodemailer');
 const multer=require("multer");
 const jwt = require('jsonwebtoken');
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 const homeRouter = require('./Routes/home');
 app.use('/',homeRouter);
 
@@ -56,5 +59,5 @@ const coordinatesRouter = require('./Routes/coordinates');
 app.use('/coordinates',coordinatesRouter);
 
 app.listen(3000,(req, res) => {
-    console.log('running port........');
+    console.log('running port........ at http://localhost:3000');
 });

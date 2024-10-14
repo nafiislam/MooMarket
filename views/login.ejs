@@ -9,25 +9,141 @@
     <link rel="stylesheet" href="/css/login.css" />
   </head>
   <body>
+    <!-- <header>
+      <a href="/"> <div class="logo"></div></a>
+    </header> -->
+    <div class="wrapper left-right-together">
 
-    <div class="container">
+
+      <div class="left">
+        <!-- <div class="welcome">Welcome to</div> -->
+        <br>
+        <div class="">
+          <br>
+          <img src="/pictures/logo.png" class="imagebox login-transition" alt="paina">
+        </div>
+        <br>
+        <div class="loading-spinner" id="loading-spinner"></div>
+      </div>
+      <div class="right">
+        <div class="login-box login-transition">
         <form class="col g-3" action="/login" method="post">
-            <div class="col-auto">
-              <label for="Phone number" class="form-label">Phone number</label>
-              <input type="number" class="form-control" id="phone_number" name="phone_number" placeholder="phone number" required>
-            </div>
-            <div class="col-auto">
-                <label for="inputPassword2" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">Login</button>
-            </div>
-            <div class="col-auto">
-              <a href="/login/forgetPassword">Forgot Password</a>
+          <div class="col-auto">
+            <label for="Phone number" class="form-label">Phone number</label>
+            <input type="number" class="form-control" id="phone_number" name="phone_number" placeholder="phone number" required> 
+          </div>
+          <div class="col-auto">
+            <label for="inputPassword2" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-5"  id="login-button">Login</button>
+            <!-- <div class="loading-spinner" id="loading-spinner"></div> -->
+          </div>
+          <div class="col-auto">
+            <a href="/login/forgetPassword">Forgot Password</a>
           </div>
         </form>
+        </div>
+      </div>
     </div>
+
+    <div class="footer">
+      <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/"
+            >MooMarket.com</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+    <script>
+            // $(document).ready(function() {
+            //     $("#login-button").click(function() {
+            //         console.log("helloooooo");
+            //         // Show the loading spinner
+            //         $("#loading-spinner").show();
+                    
+            //         // Hide the login button
+            //         $(this).hide();
+                    
+            //         // Simulate a delay (replace with actual page load code)
+            //         setTimeout(function() {
+            //             // Redirect to the next page (replace with your actual URL)
+            //             // window.location.href = "/dashboard";
+            //         }, 2000); // Adjust the delay time as needed (2 seconds in this example)
+            //     });
+            // });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script
+      src="https://kit.fontawesome.com/328bfce71b.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/scripts/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

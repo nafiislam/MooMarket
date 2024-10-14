@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>singleAdd</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+    <link rel="stylesheet" href="/css/singleAd.css" />
+  </head>
+  <body>
+
+    <!-- ....................................................NAVBAR.......................................................... -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+          <!-- Logo (Brand) -->
+          <a class="navbar-brand" href="/">
+              <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+          </a>
+          
+          <div>
+            <% if(typeof locals.session === 'undefined'){%>
+              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
+            <% }else{ %>
+            
+            <div class="btn-group">
+              <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                Dashboard
+              </button>
+              <ul class="dropdown-menu" style="background-color: #000000; margin-left: -20px;">
+                <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                <% if(locals.type=="seller"){ %>
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
+                <% }else if(locals.type=="admin"){%>
+                  <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                <% } %>
+                <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+              </ul>
+            </div>
+            <% }%>
+          </div>
+      </div>
+  </nav>
+    <!-- ....................................................END NAVBAR.......................................................... -->
+
+    <% if(locals.advType == "cattle") { %>
+       <!-- <div class="general"> -->
+    <!-- <div class="infowrap" style="text-align: left;"> -->
+        <div class="info1">
+            <h2 class="name/id" style="color: brown;">Quantity : <%=locals.advertisement.quantity%></h2>
+            <% if(locals.advertisement.is_bid){ %>
+              <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total minimum bid Price:  <%=locals.advertisement.price%> BDT</p>
+            <% }else{ %>
+              <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Total Fixed Price:  <%=locals.advertisement.price%> BDT</p>
+            <% } %>
+            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Farm name: <%= locals.advertisement.farm_name %></p>
+            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">Advertised at: <%=locals.advertisement.created_at%></p>
+            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);">
+              <% if(locals.advertisement.status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
+          </p>
+            <br>
+            <div class="container1">
+            <% if(locals.session) { %>
+              <% if(!locals.advertisement.is_bid) { %>
+                <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+            <%}else{%>
+              <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Place bid</button>
+            <%}%>
+            <% } %>
+          </div>
+        </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  
+  
+      <!-- Tab links -->
+      <div class="tab">
+        <% for(let i=0;i<cattle.length;i++) {%>
+          <%if(i==0){%>
+            <button class="tablinks" onclick="openCity(event, 'id<%=i%>')" id="defaultOpen">Cattle<%=(i+1)%></button>
+          <% }else{%>
+            <button class="tablinks" onclick="openCity(event, 'id<%=i%>')">Cattle<%=(i+1)%></button>
+          <% } %>
+        <% } %>
+      </div>
+      
+      <!-- Tab content -->
+      <% for(let i=0;i<cattle.length;i++) {%>
+        <div id="id<%=i%>" class="tabcontent">
+          <div class="row videodiv mt-5">
+              <div class="col-6" style="text-align: left;">
+                  <video width="500" height="240" controls>
+                      <source src="<%= locals.cattle[i].video_url.substring(8) %>" type="video/mp4">
+                      <source src="<%= locals.cattle[i].video_url.substring(8) %>" type="video/ogg">
+                      Your browser does not support the video tag.
+                    </video>
+              </div>
+      
+              <div class="col-6">
+                  <h3>Product Details</h3>
+                  <hr>
+                  <p>Weight : <%= locals.cattle[i].weight%>Kg</p>
+                  <p>Color : <%= locals.cattle[i].color%></p>
+                  <p>Age : <%= locals.cattle[i].age%> years</p>
+                  <p>Gender : <%= locals.cattle[i].gender%></p>
+              </div>
+             
+          </div>
+      
+          <hr class="center-hr">
+          
+          <!-- <div class="fourpics"> -->
+               <!-- Images used to open the lightbox -->
+              <div class="row1 photos">
+                  <div class="column1">
+                      <img src="<%= locals.cattle[i].picture_front_view_url.substring(8) %>" class="hover-shadow">
+                      <div class="overlay" onclick="openModal('<%=i%>');currentSlide('<%=i*4+1%>')">
+                          <div class="text">View Full</div>
+                      </div>
+                  </div>
+                  <div class="column1">
+                      <img src="<%= locals.cattle[i].picture_left_view_url.substring(8) %>" class="hover-shadow">
+                      <div class="overlay" onclick="openModal('<%=i%>');currentSlide('<%=i*4+2%>')">
+                          <div class="text">View Full</div>
+                      </div>                         
+                  </div>
+                  <div class="column1">
+                      <img src="<%= locals.cattle[i].picture_right_view_url.substring(8) %>"class="hover-shadow">
+                      <div class="overlay" onclick="openModal('<%=i%>');currentSlide('<%=i*4+3%>')">
+                          <div class="text">View Full</div>
+                       </div>
+                  </div>
+                  <div class="column1">
+                      <img src="<%= locals.cattle[i].picture_back_view_url.substring(8) %>" class="hover-shadow">
+                      <div class="overlay" onclick="openModal('<%=i%>');currentSlide('<%=i*4+4%>')">
+                          <div class="text">View Full</div>
+                      </div>
+                  </div>
+              </div>
+        
+              <!-- The Modal/Lightbox -->
+              <div id="myModal<%=i%>" class="modal">
+                  <span class="close cursor" onclick="closeModal('<%=i%>')">&times;</span>
+                  <div class="modal-content">
+              
+                  <div class="mySlides">
+                      <div class="numbertext">1 / 4</div>
+                      <img class="maindemo" src="<%= locals.cattle[i].picture_front_view_url.substring(8) %>" style="width:100%">
+                  </div>
+              
+                  <div class="mySlides">
+                      <div class="numbertext">2 / 4</div>
+                      <img class="maindemo" src="<%= locals.cattle[i].picture_left_view_url.substring(8) %>" style="width:100%">
+                  </div>
+              
+                  <div class="mySlides">
+                      <div class="numbertext">3 / 4</div>
+                      <img class="maindemo" src="<%= locals.cattle[i].picture_right_view_url.substring(8) %>" style="width:100%">
+                  </div>
+              
+                  <div class="mySlides">
+                      <div class="numbertext">4 / 4</div>
+                      <img class="maindemo" src="<%= locals.cattle[i].picture_back_view_url.substring(8) %>" style="width:100%">
+                  </div>
+              
+                  <!-- Next/previous controls -->
+                  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+              
+                  <!-- Caption text -->
+                  <div class="caption-container">
+                      <p id="caption"></p>
+                  </div>
+              
+                  <!-- Thumbnail image controls -->
+                  <div class="row">
+                      <div class="column">
+                          <img class="demo" src="<%= locals.cattle[i].picture_front_view_url.substring(8) %>" onclick="currentSlide(1)" alt="front view">
+                      </div>
+                  
+                      <div class="column">
+                          <img class="demo" src="<%= locals.cattle[i].picture_left_view_url.substring(8) %>" onclick="currentSlide(2)" alt="left view">
+                      </div>
+                  
+                      <div class="column">
+                          <img class="demo" src="<%= locals.cattle[i].picture_right_view_url.substring(8) %>" onclick="currentSlide(3)" alt="right view">
+                      </div>
+                  
+                      <div class="column">
+                          <img class="demo" src="<%= locals.cattle[i].picture_back_view_url.substring(8) %>" onclick="currentSlide(4)" alt="back view">
+                      </div>
+                  </div>
+                  </div>
+                  </div>
+                  
+          </div>
+      <% } %>
+    
+    
+        <% } else if (locals.advType!="cattle") { %>
+            <div class="row videodiv mt-5">
+                <div class="col-6" style="text-align: left;">
+                    <img src="<%= locals.advertisement.picture_url.substring(8) %>" width="500" height="240">
+                </div>
+        
+                <div class="col-2"></div>
+        
+                <div class="col-2 infowrap" style="text-align: left;">
+                      <div class="info">
+                      <% if(locals.advType=="meat") { %>
+                        <h2 class="name/id" style="color: rgb(120, 18, 18);"><%= locals.advertisement.meattype %></h2>
+                        <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);"><%= locals.advertisement.price_per_kg %> BDT/Kg</p>
+        
+                        <p>change quantity(kg) :</p>
+                        <% } else if (locals.advType=="rawhide") { %>
+                            <h2 class="name/id" style="color: rgb(120, 18, 18);">Rawhide</h2>
+                            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);"><%= locals.advertisement.selling_price_per_piece %> BDT/Piece</p>
+                            <p>change quantity(pcs) :</p>
+                          <% } else if (locals.advType=="hoof") { %>
+                            <h2 class="name/id" style="color: rgb(120, 18, 18);">Hoof</h2>
+                            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);"><%= locals.advertisement.selling_price_per_piece %> BDT/Piece</p>
+                            <p>change quantity(pcs) :</p>
+                          
+                          <% } else if (locals.advType=="horn") { %>
+                            <h2 class="name/id" style="color: rgb(120, 18, 18);">Horn</h2>
+                            <p style="opacity: 0.8; margin-top: 10px; color: rgb(73, 7, 7);"><%= locals.advertisement.selling_price_per_piece %> BDT/Piece</p>
+                            <p>change quantity(pcs) :</p>
+                          <% }%>
+
+                        <div class="container1">
+                                <button class="minus-button"  onclick="decreaseValue()">-</button>
+                                <input type="number" id="number" class="input-field" placeholder="0">
+                                <button class="plus-button"  onclick="increaseValue()">+</button>
+                        </div>
+                        <% if(locals.session) { %>
+                          <button class="btn btn-secondary productbutt"><i class="fa-solid fa-cart-plus fa-beat-fade iconcart" style="margin-right: 15px;"></i>Add to Cart</button>
+                      <% } %>
+                      </div>
+                </div>
+            </div>
+
+        <% } %>
+
+    <hr class="center-hr">
+   
+
+
+    <div class="background-box">
+        <div class="column-wrapper">
+            <div class="left-column">
+              <h3>Advertisement Info</h3>
+                <hr>
+              <% if(locals.advType=="meat") { %>
+                <h5 class="card-title">Selling price per kg: <%=locals.advertisement.price_per_kg%> BDT</h5>
+                <p>Type: <%=locals.advertisement.meattype%>
+                  <% if(locals.advertisement.status=="unfinished"){ %>
+                    <span style="color:green"><br>Status: Available</span>
+                    <br>Quantity available: <%=locals.advertisement.quantity%>
+                  <%}else{%>
+                    <span style="color:red"><br>Status: Not available</span>
+                  <% } %>
+                </p>
+              <%} else if(locals.advType=="cattle") { %>
+                  <h5 class="card-title">Fixed price: <%=locals.advertisement.price%> BDT</h5>
+                  <p>Farm name: <%=locals.advertisement.farm_name%><br>
+                  Quantity: <%=locals.advertisement.quantity%>
+                  <% if(locals.advertisement.status=="unfinished"){ %>
+                    <span style="color:green"><br>Status: Available</span>
+                  <%}else{%>
+                    <span style="color:red"><br>Status: Not available</span>
+                  <% } %>
+                </p>
+
+              <%} else if(locals.advType=="rawhide") { %>
+                <h5 class="card-title">Selling price per piece: <%=locals.advertisement.selling_price_per_piece%> BDT</h5>
+                <p>Preservation style: <%=locals.advertisement.preservation_style%>
+                  <% if(locals.advertisement.status=="unfinished"){ %>
+                    <span style="color:green"><br>Status: Available</span>
+                    <br>Quantity available: <%=locals.advertisement.quantity%>
+                  <%}else{%>
+                    <span style="color:red"><br>Status: Not available</span>
+                  <% } %>
+                </p>
+
+              <%} else if(locals.advType=="horn") { %>
+                <h5 class="card-title">Selling price per piece: <%=locals.advertisement.selling_price_per_piece%> BDT</h5>
+                Storage date: <%=locals.advertisement.date_of_storage%>
+                <% if(locals.advertisement.status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.advertisement.quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+
+              <%} else if(locals.advType=="hoof") { %>
+                <h5 class="card-title">Selling price per piece: <%=locals.advertisement.selling_price_per_piece%> BDT</h5>
+                Storage date: <%=locals.advertisement.date_of_storage%>
+                <% if(locals.advertisement.status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.advertisement.quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+                <% } %>
+            </div>
+            <div class="right-column">
+                <h3>Seller Info</h3>
+                <hr>
+                <div class="row">
+                  <div class="col-6 info-details">
+                    <h5>Name : <%=locals.seller.name%></h5>
+                    <p style="color: rgb(45, 0, 245);">Contact No : <u>+880<%=locals.seller.phone_number%></u></p>
+                    <p>Email address: <%=locals.seller.email%></p>
+                    <br>
+                    <br>
+  
+                    <p>Overall rating of this seller: <%=locals.rating.length!=0?parseFloat(locals.rating[0].avg).toFixed(2):NaN%></p>
+                    <div class="rate">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="description">
+            <h3><u>Description</u></h3>
+            <p><%=locals.advertisement.description%>
+            </p>
+        </div>
+    </div>
+
+    
+
+    <!-- ....................................................FOOTER.......................................................... -->
+    <div class="footer">
+      <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/"
+            >MooMarket.com</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+    <!-- ....................................................END FOOTER.......................................................... -->
+
+
+
+   <script src="/scripts/singleAdv.js"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/328bfce71b.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: "ease-in-out",
+    });
+  </script>
+
+  </body>
+</html>

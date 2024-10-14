@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+                                                                     
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <% if(locals.msg){ %>
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong><%=locals.msg%></strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% } %>
+    <!-- ....................................................NAVBAR.......................................................... -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+          <!-- Logo on the left -->
+          <a class="navbar-brand" href="/">
+            <img src="/pictures/logo.png"  alt="Logo" width="150" height="60">
+        </a>
+
+          <!-- Middle Section: Search Bar -->
+          <div>
+            <div class="input-group">
+              <button id="searchID" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search options</button>
+              <ul class="dropdown-menu" style="width:20px;">
+                <li><a class="dropdown-item" onclick="optionHandler(1)">Farmname</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" onclick="optionHandler(2)">Seller name</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" onclick="optionHandler(3)">Meat subtype</a></li>
+              </ul>
+              <div class="search search2">
+                <form id="form" action="/search/sellername" method="POST">
+                  <input id ="search" name ="search" type="search" placeholder="Search..." oninput="searchHandler()" required>
+                  <button type="submit">Search</button>
+                </form>
+                <div class="results" style="color: #fff;">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right Section: Login and Register Buttons -->
+          <div class="">
+            <a href="/coordinates"><button class="login btn btn mr-2"><i class="fa-solid fa-street-view fa-flip" style="margin-right: auto;"></i></i><%=locals.thana%></button></a>
+            
+            <% if(typeof locals.session === 'undefined'){%>
+              <a href="/login" ><button class="login1 btn btn mr-2"><i class="fa-solid fa-user fa-beat-fade" style="margin-right: auto;"></i>Login</button></a>
+              <a href="/register" ><button class="login1 btn mr-2"><i class="fa-solid fa-user-plus" style="margin-right: quto;"></i>Register</button></a>
+            <% }else{ %>
+            
+            <div class="btn-group">
+              <button class="login1  btn mr-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 16px;">
+                Dashboard
+              </button>
+              <ul class="dropdown-menu" style="background-color: #000000; margin-left: -20px;">
+                <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Buyer Dashboard</button></a></li>
+                <% if(locals.type=="seller"){ %>
+                  <li><a href="/seller/giveAdvertisement" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Seller Dashboard</button></a></li>
+                <% }else if(locals.type=="admin"){%>
+                  <li><a href="/admin/advertisementVerify" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Admin Dashboard</button></a></li>
+                <% } %>
+                <li><a href="/logout" class="button dropdown-item" style="background-color: #000000;"><button class="login1 btn mr-2">Logout</button></a></li>
+              </ul>
+            </div>
+            <% }%>
+          </div>
+      </div>
+  </nav>
+    <!-- ....................................................END NAVBAR.......................................................... -->
+
+   
+    <!-- ....................................................CAROUSEL.......................................................... -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/pictures/cow1.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Moo Market</h5>
+            <p>We respect your trust, ensures quality and honesty...</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/pictures/cow3.jpg" class="d-block w-100" alt="... " style="height: 600px; width: fit-content;">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Meat Market</h5>
+            <p>Your Source for Quality Beef and More!<br> Your Local Beef Expert! Your national Beef Expert!</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/pictures/cow2.jpg" class="d-block w-100" alt="..." style="height: 600px; width: fit-content;">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Cattle Market</h5>
+            <p> Bringing the Farm to Your Fork!</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- ...........................................END CAROUSEL............................................. -->
+    
+    <!-- ....................................................PRODUCTS SUMMARY.......................................................... -->
+    <div class="div container produtcs" data-aos="fade-in" style="margin-top: 40px;">
+      <div class="row justify-content-center">
+        <div class="col-1 product"><img src="/pictures/auction.PNG" alt="" class="productimg"></div>
+        <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px; background: linear-gradient(to bottom, transparent, black, transparent);"></div></div>
+        <div class="col-1 product"><img src="/pictures/cattlr.PNG" alt="" class="productimg"></div>
+        <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
+        <div class="col-1 product"><img src="/pictures/meat.PNG" alt="" class="productimg"></div>
+        <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
+        <div class="col-1 product"><img src="/pictures/horn.PNG" alt="" class="productimg"></div>
+        <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
+        <div class="col-1 product"><img src="/pictures/hoof.PNG" alt="" class="productimg"></div>
+        <div class="col-1" style="text-align: center;"><div class="vr" style="height: 120px;background: linear-gradient(to bottom, transparent, #000, transparent);"></div></div>
+        <div class="col-1 product"><img src="/pictures/hoof.jpeg" alt="" class="productimg"></div>
+      </div>
+      
+      <div class="row justify-content-center">
+        <div class="col-1 productname">Auction</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname">Cattle</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname">Meat</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname">Horn</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname">Rawhide</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname">Hoof</div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-1 productname1">Live Auction Paticipation</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname1">Cattle Buy and Sale</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname1">All Type of Meats</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname1">Horn will pinch you!!!</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname1">Rawhide presenting</div>
+        <div class="col-1"></div>
+        <div class="col-1 productname1">Hoof WholeSale</div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-1 productbutton"><a href="/category/cattleBid"><button class="btn btn-secondary productbutt">view details</button></a></div>
+        <div class="col-1"></div>
+        <div class="col-1 productbutton"><a href="/category/cattle"><button class="btn btn-secondary productbutt">view details</button></a></div>
+        <div class="col-1"></div>
+        <div class="col-1 productbutton"><a href="/category/meat"><button class="btn btn-secondary productbutt">view details</button></a></div>
+        <div class="col-1"></div>
+        <div class="col-1 productbutton"><a href="/category/horn"><button class="btn btn-secondary productbutt">view details</button></a></div>
+        <div class="col-1"></div>
+        <div class="col-1 productbutton"><a href="/category/rawhide"><button class="btn btn-secondary productbutt">view details</button></a></div>
+        <div class="col-1"></div>
+        <div class="col-1 productbutton"><a href="/category/hoof"><button class="btn btn-secondary productbutt">view details</button></a></div>
+      </div>
+    </div>
+    <!-- ....................................................END PRODUCTS SUMMARY.......................................................... -->
+
+    <!-- <div class="hrline"><hr class="hline"></div> -->
+
+    <!-- ....................................................HOT DEALS.......................................................... -->
+    <div class="container-fluid">
+      <div class="hotdealimg" data-aos="flip-left">
+        <img src="/pictures/hot_deal.png" alt="..." class="hotimg">
+      </div>
+
+      <div class=""><hr class=""></div>
+      <% if (locals.bestMeat){ %>
+      <a href="/singleAdvertisement/buyer/<%= locals.bestMeat.advertise_id %>" class="" id="" style="text-decoration: none;">
+        <div class="row row1" data-aos="fade-right">
+          <div class="col-5">
+            <img src="<%=locals.bestMeat.picture_url.substring(8) %>" alt="..." class="hotcow1">
+          </div>
+  
+          <div class="col-7" style="text-align: right;">
+            <h1 style="margin-top: 30px;">Type: <%=locals.bestMeat.type%></h1>
+            <p style="opacity: 0.8; font-size: 20px;">Price per kg: <%=locals.bestMeat.price_per_kg %> BDT</p>
+            <p style="opacity: 0.8; font-size: 20px;">Date of storage: <%=locals.bestMeat.date_of_storage %></p>
+            <p style="opacity: 0.7; font-size: 20px;">Advertised at: <%=locals.bestMeat.created_at%></p>
+            <p style="opacity: 0.7; font-size: 20px;">
+            <% if(locals.bestMeat.status=="unfinished"){ %>
+              <span style="color:green"><br>Status: Available</span>
+              <br>Quantity available: <%=locals.bestMeat.quantity%>
+            <%}else{%>
+              <span style="color:red"><br>Status: Not available</span>
+            <% } %>
+          </p>
+          </div>
+        </div>
+      </a>
+      <% } %>
+      <div class="" style="margin-top: 120px; margin-bottom: 20px;"><hr class=""></div>
+      <% if (locals.bestCattle){ %>
+     <a href="/singleAdvertisement/buyer/<%= locals.bestCattle.advertise_id %>" style="text-decoration: none;">
+      <div class="row row2" data-aos="fade-left">
+        <div class="col-7" style="text-align: left;">
+          <h1 style="margin-top: 30px;">Farm name: <%= locals.bestCattle.farm_name %></h1>
+          <p style="opacity: 0.8; font-size: 20px;">Quantity: <%= locals.bestCattle.quantity %></p>
+          <p style="opacity: 0.8; font-size: 20px;">Price: <%= locals.bestCattle.price %> BDT</p>
+          <p style="opacity: 0.7; font-size: 20px;">Advertised at: <%=locals.bestCattle.created_at%></p>
+          <p style="opacity: 0.7; font-size: 20px;">
+            <% if(locals.bestCattle.status=="unfinished"){ %>
+              <span style="color:green"><br>Status: Available</span>
+            <%}else{%>
+              <span style="color:red"><br>Status: Not available</span>
+            <% } %>
+          </p>
+        </div>
+        
+        <div class="col-5">
+          <img src="<%=locals.bestCattle.picture_front_view_url.substring(8) %>" alt="..." class="hotcow2">
+        </div>
+      </div>
+     </a>
+    <% } %>
+      
+    <!-- ....................................................END HOT DEALS.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................COWS.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">All cattle</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/cattle"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.cattleAdvertisements.length ; i++) { %>
+          <% if(!locals.cattleAdvertisements[i].is_bid) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.cattleAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Fixed price: <%=locals.cattleAdvertisements[i].price%> BDT</h5>
+              <p>Farm name: <%=locals.cattleAdvertisements[i].farm_name%><br>
+              Quantity: <%=locals.cattleAdvertisements[i].quantity%>
+              <% if(locals.cattleAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
+            </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.cattleAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>
+        <% } %>  
+      <% } %>          
+      </div>
+    </div>
+    <!-- ....................................................END COWS.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................Meat.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">All meat</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/meat"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.meatAdvertisements.length ; i++) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.meatAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.meatAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit; width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Selling price per kg: <%=locals.meatAdvertisements[i].price_per_kg%> BDT</h5>
+              <p>Type: <%=locals.meatAdvertisements[i].type%>
+                <% if(locals.meatAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.meatAdvertisements[i].quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.meatAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>       
+      <% } %>    
+      </div>
+    </div>
+    <!-- ....................................................END Meat.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................rawhide.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">All rawhide</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/rawhide"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.rawhideAdvertisements.length ; i++) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.rawhideAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.rawhideAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Selling price per piece: <%=locals.rawhideAdvertisements[i].selling_price_per_piece%> BDT</h5>
+              <p>Preservation style: <%=locals.rawhideAdvertisements[i].preservation_style%>
+                <% if(locals.rawhideAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                  <br>Quantity available: <%=locals.rawhideAdvertisements[i].quantity%>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.rawhideAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>       
+      <% } %>    
+      </div>
+    </div>
+    <!-- ....................................................END rawhide.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................HORNS.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">All horns</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/horn"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.hornAdvertisements.length ; i++) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.hornAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.hornAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Selling price per piece: <%=locals.hornAdvertisements[i].selling_price_per_piece%> BDT</h5>
+              Storage date: <%=locals.hornAdvertisements[i].date_of_storage%>
+              <% if(locals.hornAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+                <br>Quantity available: <%=locals.hornAdvertisements[i].quantity%>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.hornAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>
+        <% } %>            
+      </div>
+    </div>
+    <!-- ....................................................END HORNS.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................HOOFS.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">All hoofs</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/hoof"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.hoofAdvertisements.length ; i++) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.hoofAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.hoofAdvertisements[i].picture_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit; width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Selling price per piece: <%=locals.hoofAdvertisements[i].selling_price_per_piece%> BDT</h5>
+              Storage date: <%=locals.hoofAdvertisements[i].date_of_storage%>
+              <% if(locals.hoofAdvertisements[i].status=="unfinished"){ %>
+                <span style="color:green"><br>Status: Available</span>
+                <br>Quantity available: <%=locals.hoofAdvertisements[i].quantity%>
+              <%}else{%>
+                <span style="color:red"><br>Status: Not available</span>
+              <% } %>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.hoofAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>
+        <% } %>            
+      </div>
+    </div>
+    <!-- ....................................................END HOOFS.......................................................... -->
+
+    <div class="" style="margin-top: 60px; margin-bottom: 100px;"><hr class=""></div>
+
+    <!-- ....................................................AUCTION.......................................................... -->
+    <div class="card-wrap" data-aos="fade-up">
+      <div><hr style="margin-bottom: 0;"></div>
+      <div class="d-flex mb-3 overflow-auto" style="background-color: #7e5d3c">
+        <div class="p-2" style="font-size: 20px; background-color: #000; color: #e6c4c4; border-radius: 0 15px 0 15px;"><i style="padding-left: 30px; padding-right: 30px;">Auctions</i></div>
+        <div class="p-2 me-auto"></div>
+        <div class="p-2 "> <div class="col-1 productbutton"><a href="/category/cattleBid"><button class="btn btn-secondary productbutt">view all</button></a></div></div>
+      </div>
+      <!-- <div><hr style="margin-top: -3%;"></div> -->
+      <div><hr style="margin-top: -2%;"></div>
+      <div><hr style="margin-top: -0.8%;"></div>
+
+      <div class="card-container d-flex flex-row flex-nowrap overflow-auto">
+        <% for (var i = 0; i < locals.cattleAdvertisements.length ; i++) { %>
+          <% if(locals.cattleAdvertisements[i].is_bid) { %>
+        <a href="/singleAdvertisement/buyer/<%= locals.cattleAdvertisements[i].advertise_id%>" class="cardLink" style="text-decoration: none">
+          <div class="card">
+            <img src="<%=locals.cattleAdvertisements[i].picture_front_view_url.substring(8) %>" class="card-img-top" alt="..." style="border-radius: inherit;width: 325px; height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title">Minimum bid price: <%=locals.cattleAdvertisements[i].price%> BDT</h5>
+              <p>Farm name: <%=locals.cattleAdvertisements[i].farm_name%></p>
+              <p>Quantity: <%=locals.cattleAdvertisements[i].quantity%>
+                <% if(locals.cattleAdvertisements[i].status=="unfinished"){ %>
+                  <span style="color:green"><br>Status: Available</span>
+                <%}else{%>
+                  <span style="color:red"><br>Status: Not available</span>
+                <% } %>
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Advertised at: <%=locals.cattleAdvertisements[i].created_at%></small>
+            </div>
+          </div>
+        </a>
+        <% } %>
+      <% } %>
+      </div>
+    </div>
+    <!-- ....................................................END AUCTION.......................................................... -->
+
+
+
+    <!-- ....................................................FOOTER.......................................................... -->
+    <div class="footer">
+      <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a
+              class="btn btn-outline-light btn-floating m-1"
+              href="#!"
+              role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div
+          class="text-center p-3"
+          style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+          © 2020 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/"
+            >MooMarket.com</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
+    </div>
+    <!-- ....................................................END FOOTER.......................................................... -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/328bfce71b.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="/scripts/home.js"></script>
+  <script>
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: "ease-in-out",
+    });
+  </script>
+  
+  </body>
+</html>

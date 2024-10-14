@@ -1,6 +1,154 @@
+Reset some default styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Ensure the body covers the viewport height */
+  position: relative; /* Establish a positioning context for the footer */
+}
+
+
+
 .container {
+    max-width: 100%; /* Adjust the container width as needed */
+    margin: 0 auto;   /* Center the container */
+    /* padding: 20px; */
+    border: black;
+    background-color: transparent;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid black; /* Add a border */
+    border-width: 2px; /* Set the border width */
+  
+    backdrop-filter: blur(3px);
+  }
+
+.background-image {
+    background-image: url("../pictures/istockphoto-1169868287-612x612.jpg"); /* Replace 'your-image.jpg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+    position: center;
+    top: 0;
+    left: 0;
+    width: 612px;
+    height: 612px;
+    z-index: -1; /* Put the background image behind other content */
+    background-color: rgba(0, 0, 0, 0.2); /* 50% transparent black background */
+    /* background-repeat: repeat-y; */
+    object-fit: default;   
+}
+
+/* Style the submit button */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+  
+.logo {
+    background-image: url("../pictures/logo.png");
+    width: 400px;
+    height: 200px; 
+    position: top;
+    background-repeat: no-repeat;
+    /*z-index: 3;*/
+    background-size: cover;
+    left: 5%;
+    /* border-radius: 50%; /* This will create a circular shape */
+    /* overflow: hidden; Clip any content that goes beyond the rounded corners */
+  }
+
+  .welcome{
+    font-weight: bold;
+  }
+
+  .wrapper{
+    display: flex;
+  }
+
+  .left-right-together{
+    background-image: url("../pictures/login-bg.jpeg"); /* Replace 'your-image.jpg' with the path to your image */ 
+    background-size: cover;
+  }
+
+  .left{
+    flex: 1;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .right{
+    flex: 1;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    height: 100vh;
+    align-items: center;
+    background-color: transparent; /* Transparent white background */
+    border-radius: 0px;
+    /* backdrop-filter: blur(5px); */
+  }
+
+  .form-label{
+    color:azure;
+  }
+
+  .login-box {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  header, footer {
+    background-color: ghostwhite;
+    padding: 10px;
+  }
+
+  .logo-box {
+    max-width: 150px; /* Set the maximum desired width for your image */
+    max-height: 70px; /* Set the maximum desired height for your image */
+    width: auto; /* Let the width adjust to fit the aspect ratio */
+    height: auto; /* Let the height adjust to fit the aspect ratio */
+  }
+
+  .imagebox{
+    height: 200px;
+    width: 400px;
+  }
+
+  /* login.css */
+.login-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-transition:hover {
+  transform: scale(1.25); /* Adjust the scale factor as needed */
+}
+
+/* login.css */
+/* Add this CSS for the loading spinner */
+.loading-spinner {
+  display: none; 
+  /* Initially hidden */
+  margin-left: 25px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #007bff; /* Your primary color */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite; /* Rotate the spinner */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

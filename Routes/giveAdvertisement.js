@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
         if(req.session.type=='seller')
             res.render('giveAdvertisement',{session:req.session.phone_number})
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -34,7 +34,7 @@ router.post('/type', async(req, res) => {
                 res.render('giveHoofAdvertisement',{session:req.session.phone_number})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -80,10 +80,10 @@ router.post('/meat',upload.single("picture"), async(req, res) => {
             }
             await client.query('INSERT INTO Meat_Advertisement(type,price_per_kg,date_of_storage,date_of_expiry,picture_url,advertise_id) VALUES ($1,$2,$3,$4,$5,$6)',[type,price_per_kg,date_of_storage,date_of_expiry,location,advertise_id.rows[0].advertise_id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement submitted successfully"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement submitted successfully"})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -139,10 +139,10 @@ router.post('/cattle', upload.fields([
                 }
             }
             client.release(true);
-            res.render('output',{msg:"Advertisement submitted successfully"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement submitted successfully"})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -166,10 +166,10 @@ router.post('/rawhide',upload.single("picture"), async(req, res) => {
             }
             await client.query('INSERT INTO Rawhide_Advertisement(preservation_style,selling_price_per_piece,date_of_storage,date_of_expiry,picture_url,advertise_id) VALUES ($1,$2,$3,$4,$5,$6)',[preservation_style,selling_price_per_piece,date_of_storage,date_of_expiry,location,advertise_id.rows[0].advertise_id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement submitted successfully"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement submitted successfully"})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -193,10 +193,10 @@ router.post('/horn',upload.single("picture"), async(req, res) => {
             }
             await client.query('INSERT INTO Horn_Advertisement(selling_price_per_piece,date_of_storage,date_of_expiry,picture_url,advertise_id) VALUES ($1,$2,$3,$4,$5)',[selling_price_per_piece,date_of_storage,date_of_expiry,location,advertise_id.rows[0].advertise_id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement submitted successfully"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement submitted successfully"})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
@@ -220,10 +220,10 @@ router.post('/hoof',upload.single("picture"), async(req, res) => {
             }
             await client.query('INSERT INTO Hoof_Advertisement(selling_price_per_piece,date_of_storage,date_of_expiry,picture_url,advertise_id) VALUES ($1,$2,$3,$4,$5)',[selling_price_per_piece,date_of_storage,date_of_expiry,location,advertise_id.rows[0].advertise_id]);
             client.release(true);
-            res.render('output',{msg:"Advertisement submitted successfully"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"Advertisement submitted successfully"})
         }
         else{
-            res.render('output',{msg:"You are not a seller"})
+            res.render('output',{session:req.session.phone_number,type:req.session.type,msg:"You are not a seller"})
         }
     }
     else{
