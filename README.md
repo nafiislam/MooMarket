@@ -42,11 +42,13 @@ An online market for selling cattle, meat, hoof, horn and raw-hide.
 
 - **JWT (JSON Web Token) Authentication**:  
   Uses **JWT** tokens for secure session management and **bcrypt** for password hashing, ensuring secure login and data handling.
-## Design tools
+
+## Design and Diagrams
 - UI design by Figma
 - bpmn diagram
 - ERD diagram and Class diagram
 - Collaboration diagram, Sequence diagram and State diagram
+
 ## Installation instructions
 ### Clone the repository:
 ```
