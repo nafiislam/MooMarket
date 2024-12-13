@@ -3,14 +3,14 @@ An online market for selling cattle, meat, hoof, horn and raw-hide.
 
 ## Functionalities
 1. Advertisements of various products (cattle, meat etc.) from sellers
-2. Location based advertisements display
+2. Location-based advertisements display
 3. Purchasing products by Buyers
 4. Filtering options for users to help users find their desired products
 5. Order post from buyers
 6. Acceptance of order posts by sellers
 7. Reviews and ratings given by buyers
 8. Priority points assigned to the sellers
-9. Auction for cattles
+9. Auction for cattle
 
 ## Technology Stack
 - **Languages**: JavaScript (Node.js, Vanilla JS)
@@ -47,7 +47,7 @@ An online market for selling cattle, meat, hoof, horn and raw-hide.
 - UI design by Figma
 - bpmn diagram
 - ERD diagram and Class diagram
-- Collaboration diagram, Sequence diagram and State diagram
+- Collaboration diagram, Sequence diagram, and State diagram
 
 ## Installation instructions
 ### Clone the repository:
